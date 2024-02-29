@@ -1,6 +1,6 @@
 import NotificationImportantOutlinedIcon from '@mui/icons-material/NotificationImportantOutlined';
 import SearchIcon from '@mui/icons-material/Search';
-import { Container, HomeIcon, LeftContainer, NotifIcon, ProfileImg, SearchBox, SearchInput, WriteBox } from './style';
+import { Container, HomeIcon, LeftContainer, NotifIcon, ProfileImg, SearchBox, SearchInput, WriteBox } from './header-style';
 import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 
 export const Header = () => {

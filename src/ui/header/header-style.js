@@ -46,13 +46,13 @@ export const WriteBox = styled.a`
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: #777272;
+    color: #6B6B6B;
 `
 
 export const NotifIcon = styled.a`
     cursor: pointer;
     margin: 0 24px;
-    color: #777272;
+    color: #6B6B6B;
 `
 
 export const ProfileImg = styled.a`
