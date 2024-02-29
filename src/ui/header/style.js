@@ -41,3 +41,26 @@ export const SearchInput = styled.input`
         border: none;
         line-height: 20px;
     `
+export const WriteBox = styled.a`
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #777272;
+`
+
+export const NotifIcon = styled.a`
+    cursor: pointer;
+    margin: 0 24px;
+    color: #777272;
+`
+
+export const ProfileImg = styled.a`
+    cursor: pointer;
+    display: inline-block;
+    width: 40px; 
+    height: 40px;
+    background-image: url('https://miro.medium.com/v2/resize:fill:64:64/1*wMnxt9B3gQMzycxq4y7tYw.png');
+    background-size: cover;
+    border-radius: 50%;
+`
