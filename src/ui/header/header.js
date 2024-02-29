@@ -20,7 +20,7 @@ export const Header = () => {
             <NotifIcon href='/notif'>
                 <NotificationImportantOutlinedIcon />
             </NotifIcon>
-            <ProfileImg href='/profile'/>
+            <ProfileImg href='/profile' />
         </Container>
     )
 }
