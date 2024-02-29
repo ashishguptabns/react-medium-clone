@@ -1,4 +1,10 @@
+import { Helmet } from 'react-helmet';
+
 export const Home = () => {
-    return <div>
-    </div>
+    return (<>
+        <Helmet>
+            <title>{'Explore topics'}</title>
+        </Helmet>
+
+    </>)
 }
