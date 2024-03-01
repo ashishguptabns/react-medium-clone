@@ -5,7 +5,7 @@ import { setTab } from "../../home-slice"
 const Container = styled.div`
     min-width: max-content;
     border-bottom: ${props => props.$isSelected ? '1px solid #242424' : ''};
-    padding-bottom: 16px;
+    padding: 10px 0 16px 0;
     margin-right: 32px;
     cursor: pointer;
     color: ${props => props.$isSelected ? '#242424' : 'gray'};

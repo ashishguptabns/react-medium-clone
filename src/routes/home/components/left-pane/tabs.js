@@ -5,11 +5,14 @@ import { useState } from "react"
 import { fetchTabsUseCase } from "../../../../lib/data"
 
 const Container = styled.div`
+    position: sticky;
+    top: 0;
     display: flex;
+    background: white;
     overflow: hidden;
     box-shadow: inset 0 -1px 0 #F2F2F2;
     scrollbar-width: none;
-    margin: 16px 24px 0 24px;
+    margin: 0 24px;
 `
 
 export const Tabs = () => {
