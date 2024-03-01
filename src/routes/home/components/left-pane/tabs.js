@@ -10,11 +10,11 @@ const Container = styled.div`
 `
 
 export const Tabs = () => {
+
     return <Container>
         <Tab title='For you' />
         <Tab title='Following' />
         <Tab title='React' />
         <Tab title='Javascript' />
-        <Tab title='' />
     </Container>
 }
