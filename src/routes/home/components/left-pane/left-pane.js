@@ -6,7 +6,7 @@ const Container = styled.div`
     display: block;
     border-right: 1px solid #F2F2F2;
     min-height: 500px;
-    min-width: 70%;
+    width: 70%;
     padding: 20px;
 `
 

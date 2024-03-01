@@ -15,12 +15,22 @@ export const articles = {
     'For you':
         [
             {
-                id: '1', title: 'Memory Leaks in JavaScript: Causes, Solutions, and Best Practices',
+                id: '1',
+                title: 'Memory Leaks in JavaScript: Causes, Solutions, and Best Practices',
                 desc: 'Master JavaScript memory management and bid farewell to memory leaks! 🚀 Learn memory leak prevention tips. 🛠️ #WebDevelopment #JavaScript #MemoryManagement #JavaScriptDevelopment #MemoryLeaks #CodeOptimization —  Memory management is a crucial aspect of JavaScript development, especially when building web applications that run in the browser. …',
                 imgUrl: 'https://miro.medium.com/v2/da:true/resize:fill:224:224/0*RRXMZA_btNgpos1k',
-                usrImgUrl: 'https://miro.medium.com/v2/resize:fill:48:48/1*-XR2314C9VKdi16g-sVdKg.jpeg',
+                usrImgUrl: 'https://miro.medium.com/v2/resize:fill:48:48/1*J__ey8I1Asc8mMICHRRReQ.jpeg',
                 username: 'Theodore John.S',
-                updatedAt: 'Dec 11, 2023'
-            }
+                updatedAt: 'Dec 11, 2023',
+            },
+            {
+                id: '2',
+                title: 'Ideals for Logging on the Backend',
+                desc: 'Listen, good logging will save you a ton of time and energy when finding out why something happened. When bad things happen, and you know why, you’re well on your way towards a solution. If you don’t know why, you’re an ocean away, and you don’t even know which ocean. …',
+                imgUrl: 'https://miro.medium.com/v2/resize:fill:224:224/1*z93z44hsytIrTiAkICfOOg.png',
+                usrImgUrl: 'https://miro.medium.com/v2/resize:fill:48:48/1*Kyxljh2FNSncitokkWdT3Q.png',
+                username: 'Theodore John.S',
+                updatedAt: 'Sep 3, 2023',
+            },
         ]
 }
