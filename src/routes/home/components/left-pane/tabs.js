@@ -25,7 +25,7 @@ export const Tabs = () => {
 
     return (
         <Container>
-            {tabs.length > 0 && tabs.map((tab) => <Tab key={tab.id} title={tab.title} />)}
+            {tabs.length > 0 && tabs.map(tab => <Tab key={tab.id} title={tab.title} />)}
         </Container>
     )
 }

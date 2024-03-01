@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { Tabs } from "./tabs"
+import { ListArticles } from "./list-articles"
 
 const Container = styled.div`
     display: block;
@@ -13,6 +14,7 @@ export const HomeLeftPane = () => {
     return (
         <Container>
             <Tabs />
+            <ListArticles />
         </Container>
     )
 }
