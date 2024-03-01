@@ -1,5 +1,8 @@
 import styled from "styled-components"
 import { Tab } from "./tab"
+import { useEffect } from "react"
+import { useState } from "react"
+import { fetchTabsUseCase } from "../../../../lib/data"
 
 const Container = styled.div`
     display: flex;
@@ -10,11 +13,19 @@ const Container = styled.div`
 `
 
 export const Tabs = () => {
+    const [tabs, setTabs] = useState([])
 
-    return <Container>
-        <Tab title='For you' />
-        <Tab title='Following' />
-        <Tab title='React' />
-        <Tab title='Javascript' />
-    </Container>
+    const fetchTabs = async () => {
+        const tabs = await fetchTabsUseCase()
+        setTabs(tabs)
+    }
+    useEffect(() => {
+        fetchTabs()
+    }, [])
+
+    return (
+        <Container>
+            {tabs.length > 0 && tabs.map((tab) => <Tab key={tab.id} title={tab.title} />)}
+        </Container>
+    )
 }

@@ -60,7 +60,7 @@ export const ProfileImg = styled.a`
     display: inline-block;
     width: 40px; 
     height: 40px;
-    background-image: url('https://miro.medium.com/v2/resize:fill:64:64/1*wMnxt9B3gQMzycxq4y7tYw.png');
+    background-image: url(${props => props.$imgUrl});
     background-size: cover;
     border-radius: 50%;
 `
