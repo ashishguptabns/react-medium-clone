@@ -7,8 +7,10 @@ export const tabs = [
     { title: 'For you', id: '1' },
     { title: 'Following', id: '2' },
     { title: 'React', id: '3' },
+    { title: 'UI/UX', id: '6' },
     { title: 'Javascript', id: '4' },
-    { title: 'Node', id: '5' }
+    { title: 'Node', id: '5' },
+    { title: 'System Design', id: '7' }
 ]
 
 export const articles = {
