@@ -6,7 +6,7 @@ import { Article } from "./article"
 import styled from "styled-components"
 
 const Container = styled.div`
-    padding-top: 10px;
+    padding-top: 20px;
 `
 
 export const ListArticles = () => {

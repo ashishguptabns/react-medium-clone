@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
+    cursor: pointer;
     max-height: 340px;
     margin: 0 24px 10px 24px;
     padding-bottom: 10px;

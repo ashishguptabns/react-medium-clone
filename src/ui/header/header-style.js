@@ -24,12 +24,15 @@ export const SearchBox = styled.div`
         display: flex;
         align-items: center;
         margin-left: 16px;
-        width: 240px;
+        width: 100px;
         height: 40px;
         background: #F9F9F9;
         border-radius: 20px;
         border: none;
         padding: 0 12px;
+        @media (min-width: 768px) {
+            width: 240px;
+        }
     `
 export const SearchInput = styled.input`
         color: #242424;
@@ -43,10 +46,13 @@ export const SearchInput = styled.input`
     `
 export const WriteBox = styled.a`
     cursor: pointer;
-    display: flex;
+    display: none;
     align-items: center;
     text-decoration: none;
     color: #6B6B6B;
+    @media (min-width: 768px) {
+        display: flex;
+    }
 `
 
 export const NotifIcon = styled.a`
