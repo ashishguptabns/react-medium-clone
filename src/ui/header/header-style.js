@@ -44,8 +44,8 @@ export const SearchInput = styled.input`
         border: none;
         line-height: 20px;
     `
-export const WriteBox = styled.a`
-    cursor: pointer;
+export const WriteBox = styled.div`
+    cursor: default;
     display: none;
     align-items: center;
     text-decoration: none;
@@ -55,14 +55,13 @@ export const WriteBox = styled.a`
     }
 `
 
-export const NotifIcon = styled.a`
-    cursor: pointer;
+export const NotifIcon = styled.div`
+    cursor: default;
     margin: 0 24px;
     color: #6B6B6B;
 `
 
-export const ProfileImg = styled.a`
-    cursor: pointer;
+export const ProfileImg = styled.div`
     display: inline-block;
     width: 40px; 
     height: 40px;
