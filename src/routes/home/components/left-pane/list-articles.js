@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
-import { fetchArticlesUseCase } from "../../../../lib/data"
+import { fetchArticlesUseCase } from "../../../../lib/data-service"
 import { Article } from "./article"
 import styled from "styled-components"
 

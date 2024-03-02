@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Tab } from "./tab"
 import { useEffect } from "react"
 import { useState } from "react"
-import { fetchTabsUseCase } from "../../../../lib/data"
+import { fetchTabsUseCase } from "../../../../lib/data-service"
 
 const Container = styled.div`
     position: sticky;

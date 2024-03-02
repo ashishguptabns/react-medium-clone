@@ -4,8 +4,6 @@ export const currUser = {
 }
 
 export const tabs = [
-    { title: 'For you', id: '1' },
-    { title: 'Following', id: '2' },
     { title: 'React', id: '3' },
     { title: 'Javascript', id: '4' },
     { title: 'Node', id: '5' },
@@ -16,7 +14,7 @@ export const tabs = [
 ]
 
 export const articles = {
-    'For you':
+    'React':
         [
             {
                 id: '1',
