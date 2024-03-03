@@ -61,11 +61,8 @@ export const NotifIcon = styled.div`
     color: #6B6B6B;
 `
 
-export const ProfileImg = styled.div`
-    display: inline-block;
+export const ProfileImg = styled.img`
     width: 40px; 
     height: 40px;
-    background-image: url(${props => props.$imgUrl});
-    background-size: cover;
     border-radius: 50%;
 `

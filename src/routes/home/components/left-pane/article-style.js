@@ -48,4 +48,6 @@ export const ArticleImage = styled.img`
     aspect-ratio: auto 112 / 112;
     height: 112px;
     margin-left: 20px;
+    border-radius: 10px;
+    background: #f6f7f8;
 `

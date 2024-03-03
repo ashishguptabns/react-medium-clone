@@ -3,6 +3,7 @@ import { Tab } from "./tab"
 import { useEffect } from "react"
 import { useState } from "react"
 import { fetchTabsUseCase } from "../../../../lib/data-service"
+import { blankTabs } from "../../../../lib/mock-data"
 
 const Container = styled.div`
     position: sticky;
@@ -19,6 +20,7 @@ export const Tabs = () => {
     const [tabs, setTabs] = useState([])
 
     const fetchTabs = () => {
+        setTabs(blankTabs)
         fetchTabsUseCase().then(data => setTabs(data))
     }
     useEffect(() => {
@@ -27,7 +29,7 @@ export const Tabs = () => {
 
     return (
         <Container>
-            {tabs.length > 0 && tabs.map(tab => <Tab key={tab.id} title={tab.title} />)}
+            {tabs.map(tab => <Tab key={tab.id} title={tab.title} />)}
         </Container>
     )
 }

@@ -12,6 +12,15 @@ export const tabs = [
     { title: 'Product', id: '8' },
     { title: 'Data Science', id: '9' }
 ]
+export const blankTabs = [
+    { id: '3' },
+    { id: '4' },
+    { id: '5' },
+    { id: '6' },
+    { id: '7' },
+    { id: '8' },
+    { id: '9' }
+]
 
 export const articles = {
     'React':
@@ -69,6 +78,30 @@ export const articles = {
                 usrImgUrl: 'https://miro.medium.com/v2/resize:fill:48:48/1*Kyxljh2FNSncitokkWdT3Q.png',
                 username: 'Theodore John.S',
                 updatedAt: 'Sep 3, 2023',
+            },
+        ]
+}
+
+export const blankArticles = {
+    'React':
+        [
+            {
+                id: '1',
+            },
+            {
+                id: '2',
+            },
+            {
+                id: '3',
+            },
+            {
+                id: '4',
+            },
+            {
+                id: '5',
+            },
+            {
+                id: '6',
             },
         ]
 }

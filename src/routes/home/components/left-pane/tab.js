@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { useSelector, useDispatch } from 'react-redux'
 import { setTab } from "../../home-slice"
+import { ShimmerDiv } from "../../../../ui/loading/shimmer-div"
 
 const Container = styled.div`
     min-width: max-content;
@@ -12,11 +13,23 @@ const Container = styled.div`
     font-size: 14px;
 `
 
+const PlaceholderTab = () => {
+    return (
+        <Container>
+            <ShimmerDiv w='80px' h='20px' />
+        </Container>
+    )
+}
 export const Tab = ({ title }) => {
     const currTab = useSelector((state) => state.home.currTab)
     const dispatch = useDispatch()
 
     const handleTabClick = () => dispatch(setTab(title))
 
-    return <Container onClick={handleTabClick} $isSelected={currTab === title}>{title}</Container>
+    return (
+        <>
+            {!title && <PlaceholderTab />}
+            {title && <Container onClick={handleTabClick} $isSelected={currTab === title}>{title}</Container>}
+        </>
+    )
 }
