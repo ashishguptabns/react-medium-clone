@@ -7,10 +7,8 @@ export const tabs = [
     { title: 'React', id: '3' },
     { title: 'Javascript', id: '4' },
     { title: 'Node', id: '5' },
-    { title: 'Go', id: '6' },
     { title: 'System Design', id: '7' },
-    { title: 'Python', id: '8' },
-    { title: 'Data Science', id: '9' }
+    { title: 'DSA', id: '9' }
 ]
 export const blankTabs = [
     { id: '3' },
