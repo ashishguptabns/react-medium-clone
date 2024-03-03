@@ -53,13 +53,10 @@ export const SearchInput = styled.input`
     `
 export const WriteBox = styled.a`
     cursor: pointer;
-    display: none;
+    display: flex;
     align-items: center;
     text-decoration: none;
     color: #6B6B6B;
-    @media (min-width: 768px) {
-        display: flex;
-    }
 `
 
 export const NotifIcon = styled.div`
@@ -72,4 +69,10 @@ export const ProfileImg = styled.img`
     width: 40px; 
     height: 40px;
     border-radius: 50%;
+`
+export const EditCTA = styled.p`
+    display: none;
+    @media (min-width: 768px) {
+        display: flex;
+    }
 `
