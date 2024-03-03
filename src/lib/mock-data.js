@@ -7,19 +7,15 @@ export const tabs = [
     { title: 'React', id: '3' },
     { title: 'Javascript', id: '4' },
     { title: 'Node', id: '5' },
-    { title: 'UI/UX', id: '6' },
+    { title: 'Go', id: '6' },
     { title: 'System Design', id: '7' },
-    { title: 'Product', id: '8' },
+    { title: 'Python', id: '8' },
     { title: 'Data Science', id: '9' }
 ]
 export const blankTabs = [
     { id: '3' },
     { id: '4' },
     { id: '5' },
-    { id: '6' },
-    { id: '7' },
-    { id: '8' },
-    { id: '9' }
 ]
 
 export const articles = {
