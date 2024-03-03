@@ -27,7 +27,7 @@ export const Header = () => {
             <LeftContainer>
                 <HomeIcon href='/' />
                 <SearchBox>
-                    <SearchIcon />
+                    {/* <SearchIcon /> */}
                     <SearchInput placeholder='Search' />
                 </SearchBox>
             </LeftContainer>

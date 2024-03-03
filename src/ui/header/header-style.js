@@ -29,7 +29,7 @@ export const SearchBox = styled.div`
         background: #F9F9F9;
         border-radius: 20px;
         border: none;
-        padding: 0 12px;
+        padding: 0 6px;
         transition: width 0.3s ease; 
         &:focus-within {
             width: 160px; 
