@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
+    cursor: pointer;
     max-height: 340px;
     margin: 0 24px 10px 24px;
     padding-bottom: 10px;
@@ -47,4 +48,6 @@ export const ArticleImage = styled.img`
     aspect-ratio: auto 112 / 112;
     height: 112px;
     margin-left: 20px;
+    border-radius: 10px;
+    background: #f6f7f8;
 `

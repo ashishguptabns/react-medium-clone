@@ -4,15 +4,22 @@ export const currUser = {
 }
 
 export const tabs = [
-    { title: 'For you', id: '1' },
-    { title: 'Following', id: '2' },
     { title: 'React', id: '3' },
     { title: 'Javascript', id: '4' },
-    { title: 'Node', id: '5' }
+    { title: 'Node', id: '5' },
+    { title: 'Go', id: '6' },
+    { title: 'System Design', id: '7' },
+    { title: 'Python', id: '8' },
+    { title: 'Data Science', id: '9' }
+]
+export const blankTabs = [
+    { id: '3' },
+    { id: '4' },
+    { id: '5' },
 ]
 
 export const articles = {
-    'For you':
+    'React':
         [
             {
                 id: '1',
@@ -70,3 +77,24 @@ export const articles = {
             },
         ]
 }
+
+export const blankArticles = [
+    {
+        id: '1',
+    },
+    {
+        id: '2',
+    },
+    {
+        id: '3',
+    },
+    {
+        id: '4',
+    },
+    {
+        id: '5',
+    },
+    {
+        id: '6',
+    },
+]

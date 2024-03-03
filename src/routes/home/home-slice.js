@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const homeSlice = createSlice({
     name: 'home',
     initialState: {
-        currTab: 'For you',
+        currTab: 'React',
     },
     reducers: {
         setTab: (state, action) => {

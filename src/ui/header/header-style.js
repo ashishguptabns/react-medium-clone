@@ -24,12 +24,22 @@ export const SearchBox = styled.div`
         display: flex;
         align-items: center;
         margin-left: 16px;
-        width: 240px;
+        width: 100px;
         height: 40px;
         background: #F9F9F9;
         border-radius: 20px;
         border: none;
         padding: 0 12px;
+        transition: width 0.3s ease; 
+        &:focus-within {
+            width: 160px; 
+        }
+        @media (min-width: 768px) {
+            width: 240px;
+            &:focus-within {
+                width: 400px; 
+            }
+        }
     `
 export const SearchInput = styled.input`
         color: #242424;
@@ -41,26 +51,25 @@ export const SearchInput = styled.input`
         border: none;
         line-height: 20px;
     `
-export const WriteBox = styled.a`
-    cursor: pointer;
-    display: flex;
+export const WriteBox = styled.div`
+    cursor: default;
+    display: none;
     align-items: center;
     text-decoration: none;
     color: #6B6B6B;
+    @media (min-width: 768px) {
+        display: flex;
+    }
 `
 
-export const NotifIcon = styled.a`
-    cursor: pointer;
+export const NotifIcon = styled.div`
+    cursor: default;
     margin: 0 24px;
     color: #6B6B6B;
 `
 
-export const ProfileImg = styled.a`
-    cursor: pointer;
-    display: inline-block;
+export const ProfileImg = styled.img`
     width: 40px; 
     height: 40px;
-    background-image: url(${props => props.$imgUrl});
-    background-size: cover;
     border-radius: 50%;
 `
