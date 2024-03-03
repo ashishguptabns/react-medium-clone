@@ -57,6 +57,7 @@ export const WriteBox = styled.a`
     align-items: center;
     text-decoration: none;
     color: #6B6B6B;
+    margin: 0 24px;
 `
 
 export const NotifIcon = styled.div`
