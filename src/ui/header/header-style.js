@@ -51,8 +51,8 @@ export const SearchInput = styled.input`
         border: none;
         line-height: 20px;
     `
-export const WriteBox = styled.div`
-    cursor: default;
+export const WriteBox = styled.a`
+    cursor: pointer;
     display: none;
     align-items: center;
     text-decoration: none;
