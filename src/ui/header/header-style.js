@@ -29,7 +29,7 @@ export const SearchBox = styled.div`
         background: #F9F9F9;
         border-radius: 20px;
         border: none;
-        padding: 0 12px;
+        padding: 0 6px;
         transition: width 0.3s ease; 
         &:focus-within {
             width: 160px; 
@@ -51,15 +51,13 @@ export const SearchInput = styled.input`
         border: none;
         line-height: 20px;
     `
-export const WriteBox = styled.div`
-    cursor: default;
-    display: none;
+export const WriteBox = styled.a`
+    cursor: pointer;
+    display: flex;
     align-items: center;
     text-decoration: none;
     color: #6B6B6B;
-    @media (min-width: 768px) {
-        display: flex;
-    }
+    margin: 0 24px;
 `
 
 export const NotifIcon = styled.div`
@@ -72,4 +70,10 @@ export const ProfileImg = styled.img`
     width: 40px; 
     height: 40px;
     border-radius: 50%;
+`
+export const EditCTA = styled.p`
+    display: none;
+    @media (min-width: 768px) {
+        display: flex;
+    }
 `

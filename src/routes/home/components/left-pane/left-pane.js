@@ -7,10 +7,11 @@ const Container = styled.div`
     border-right: 1px solid #F2F2F2;
     min-height: 500px;
     width: 100%;
+    padding: 10px 0;
     @media (min-width: 768px) {
         width: 70%;
+        padding: 10px;
     }
-    padding: 10px;
 `
 
 export const HomeLeftPane = () => {
