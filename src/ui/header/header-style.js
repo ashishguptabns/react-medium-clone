@@ -30,8 +30,15 @@ export const SearchBox = styled.div`
         border-radius: 20px;
         border: none;
         padding: 0 12px;
+        transition: width 0.3s ease; 
+        &:focus-within {
+            width: 160px; 
+        }
         @media (min-width: 768px) {
             width: 240px;
+            &:focus-within {
+                width: 400px; 
+            }
         }
     `
 export const SearchInput = styled.input`
