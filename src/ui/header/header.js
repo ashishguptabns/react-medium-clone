@@ -9,9 +9,8 @@ import { useState } from 'react';
 export const Header = () => {
     const [user, setUser] = useState({})
 
-    const fetchUserDetails = async () => {
-        const user = await fetchUserDetailsUseCase()
-        user && setUser(user)
+    const fetchUserDetails = () => {
+        fetchUserDetailsUseCase().then(data => setUser(data))
     }
 
     useEffect(() => {

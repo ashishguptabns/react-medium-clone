@@ -13,9 +13,9 @@ export const ListArticles = () => {
     const currTab = useSelector(state => state.home.currTab)
     const [articles, setArticles] = useState([])
 
-    const fetchArticles = async () => {
-        const articles = fetchArticlesUseCase(currTab)
-        setArticles(articles)
+    const fetchArticles = () => {
+        setArticles([])
+        fetchArticlesUseCase(currTab).then(data => setArticles(data))
     }
     useEffect(() => {
         fetchArticles()

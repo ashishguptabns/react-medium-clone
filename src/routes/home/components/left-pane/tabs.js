@@ -18,9 +18,8 @@ const Container = styled.div`
 export const Tabs = () => {
     const [tabs, setTabs] = useState([])
 
-    const fetchTabs = async () => {
-        const tabs = await fetchTabsUseCase()
-        setTabs(tabs)
+    const fetchTabs = () => {
+        fetchTabsUseCase().then(data => setTabs(data))
     }
     useEffect(() => {
         fetchTabs()
