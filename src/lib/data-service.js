@@ -22,7 +22,8 @@ export const fetchTabsUseCase = async () => {
 export const fetchArticlesUseCase = async (tag) => {
     let data
     try {
-        const url = NETWORK.HOST.replace('operationId', 'getArticles')
+        const networkHost = NETWORK.HOST;
+        const url = networkHost.replace('operationId', 'getArticles');
         const res = await fetch(url + `?tag=${tag}`);
         data = (await res.json());
     } catch (error) {
