@@ -9,7 +9,7 @@ const HomeContainer = styled.div`
 `
 export const Home = () => {
     useEffect(() => {
-        document.title = 'Explore topics';
+        document.title = 'Coding Interview Guide';
     }, []);
 
     return (

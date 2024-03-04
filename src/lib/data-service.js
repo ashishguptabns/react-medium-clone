@@ -1,3 +1,4 @@
+import { NETWORK } from "./constants";
 import { articles, currUser, tabs } from "./mock-data"
 
 export const fetchUserDetailsUseCase = async () => {
@@ -18,11 +19,15 @@ export const fetchTabsUseCase = async () => {
     return data
 }
 
-export const fetchArticlesUseCase = async (currTab) => {
-    const data = await new Promise((res, rej) => {
-        setTimeout(() => {
-            res(articles[currTab])
-        }, 2000);
-    })
+export const fetchArticlesUseCase = async (tag) => {
+    let data
+    try {
+        const networkHost = NETWORK.HOST;
+        const url = networkHost.replace('operationId', 'getArticles');
+        const res = await fetch(url + `?tag=${tag}`);
+        data = (await res.json());
+    } catch (error) {
+        console.error('fetchArticlesUseCase', error);
+    }
     return data
 }

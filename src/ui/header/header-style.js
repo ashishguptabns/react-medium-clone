@@ -77,3 +77,15 @@ export const EditCTA = styled.p`
         display: flex;
     }
 `
+
+export const PublishButton = styled.div`
+    width: 70px;
+    background: green;
+    color: white;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 6px;
+    margin-right: 24px;
+    cursor: pointer;
+    text-align: center;
+`
