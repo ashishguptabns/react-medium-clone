@@ -58,6 +58,7 @@ const editorConfig = {
 export const NewStory = () => {
 
     useEffect(() => {
+        document.title = 'Share your coding knowledge';
         if (!editor) {
             editor = new EditorJS(editorConfig)
         }
