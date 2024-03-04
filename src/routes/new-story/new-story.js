@@ -1,43 +1,31 @@
-import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
-import { LexicalComposer } from '@lexical/react/LexicalComposer';
-import { ContentEditable } from '@lexical/react/LexicalContentEditable';
-import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
-import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
-import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import * as React from 'react';
-
-import LexicalTheme from './lexical-theme';
-import { ToolbarPlugin } from './plugins/ToolbarPlugin';
-
-function Placeholder() {
-    return <div className="editor-placeholder">Write your content here...</div>;
-}
+import EditorJS from '@editorjs/editorjs';
+import { useEffect } from 'react';
+import { editorTools } from './helper';
 
 const editorConfig = {
-    namespace: 'React.js Demo',
-    nodes: [],
-    onError(error) {
-        throw error;
+    holder: 'editorjs',
+    tools: editorTools,
+    data: {},
+    onReady: () => {
+        console.log('Editor.js is ready to work!')
     },
-    theme: LexicalTheme,
-};
-
-
+    autofocus: false,
+    placeholder: 'Write your content here.',
+    logLevel: 'ERROR',
+    readOnly: false,
+    inlineToolbar: ['link', 'marker', 'bold', 'italic'],
+}
+let editor
 export const NewStory = () => {
+
+    useEffect(() => {
+        if (!editor) {
+            editor = new EditorJS(editorConfig)
+        }
+    }, [])
+
     return (
-        <LexicalComposer initialConfig={editorConfig}>
-            <div className="editor-container">
-                <ToolbarPlugin />
-                <div className="editor-inner">
-                    <RichTextPlugin
-                        contentEditable={<ContentEditable className="editor-input" />}
-                        placeholder={<Placeholder />}
-                        ErrorBoundary={LexicalErrorBoundary}
-                    />
-                    <HistoryPlugin />
-                    <AutoFocusPlugin />
-                </div>
-            </div>
-        </LexicalComposer>
+        <div id='editorjs' />
     )
 }

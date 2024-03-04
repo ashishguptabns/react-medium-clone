@@ -9,13 +9,16 @@ import { useState } from 'react';
 export const Header = () => {
     const [user, setUser] = useState({})
     const [showWriteBox, setShowWriteBox] = useState(false)
+    const [showSearchBox, setShowSearchBox] = useState(false)
 
     const fetchUserDetails = () => {
         fetchUserDetailsUseCase().then(data => setUser(data))
     }
 
     const handleHeaderItems = () => {
-        setShowWriteBox(!window.location.pathname.includes('new-story'))
+        const isEditing = window.location.pathname.includes('new-story')
+        setShowWriteBox(!isEditing)
+        setShowSearchBox(!isEditing)
     }
     useEffect(() => {
         fetchUserDetails()
@@ -26,10 +29,10 @@ export const Header = () => {
         <Container>
             <LeftContainer>
                 <HomeIcon href='/' />
-                <SearchBox>
+                {showSearchBox && <SearchBox>
                     {/* <SearchIcon /> */}
                     <SearchInput placeholder='Search' />
-                </SearchBox>
+                </SearchBox>}
             </LeftContainer>
             {showWriteBox && <WriteBox href='/new-story'>
                 <EditNoteOutlinedIcon />
