@@ -46,3 +46,19 @@ export const postArticleUseCase = async () => {
     }
     return data
 }
+
+export const postBlockUseCase = (block) => {
+    try {
+        const networkHost = NETWORK.HOST;
+        const url = networkHost.replace('operationId', 'postBlock');
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(block)
+        }).then(console.log);
+    } catch (error) {
+        console.error('postBlockUseCase', error);
+    }
+}

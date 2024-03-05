@@ -3,8 +3,10 @@ import * as React from 'react';
 import EditorJS from '@editorjs/editorjs';
 import { useEffect } from 'react';
 import { editorTools, startData } from './helper';
-import { useState } from 'react';
-import { postArticleUseCase } from '../../lib/data-service';
+import { postArticleUseCase, postBlockUseCase } from '../../lib/data-service';
+import { useDispatch } from 'react-redux'
+import { setArticleId } from '../../global-slice';
+import { useParams } from 'react-router-dom';
 
 let editor
 
@@ -13,14 +15,30 @@ const Container = styled.div`
 `
 
 export const Story = () => {
-    const [articleId, setArticleId] = useState()
+    const dispatch = useDispatch()
+    let articleId = useParams().id
+    if (articleId) {
+        dispatch(setArticleId(articleId))
+    }
 
     const handleArticleCreation = async () => {
         if (!articleId) {
-            const id = (await postArticleUseCase()).id
-            setArticleId(id)
-            window.history.replaceState({}, '', `${id}`);
+            articleId = (await postArticleUseCase()).id
+            window.history.replaceState({}, '', `${articleId}`);
+            dispatch(setArticleId(articleId))
         }
+    }
+    const handleChangedBlock = (blockData) => {
+
+    }
+    const handleAddedBlock = (blockData) => {
+        postBlockUseCase(blockData)
+    }
+    const handleMovedBlock = (blockData) => {
+
+    }
+    const handleDeletedBlock = (blockData) => {
+
     }
     const handleEditorChange = async (api, event) => {
         await handleArticleCreation()
@@ -30,16 +48,16 @@ export const Story = () => {
         })
         switch (event.type) {
             case 'block-changed':
-                console.log(event.type, blockData)
+                handleChangedBlock(blockData)
                 break
             case 'block-added':
-                console.log(event.type, blockData)
+                handleAddedBlock(blockData)
                 break
             case 'block-removed':
-                console.log(event.type, blockData)
+                handleDeletedBlock(blockData)
                 break
             case 'block-moved':
-                console.log(event.type, blockData)
+                handleMovedBlock(blockData)
                 break
         }
     }

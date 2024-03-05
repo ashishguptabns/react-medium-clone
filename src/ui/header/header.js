@@ -1,6 +1,4 @@
-import NotificationImportantOutlinedIcon from '@mui/icons-material/NotificationImportantOutlined';
-import SearchIcon from '@mui/icons-material/Search';
-import { Container, EditCTA, HomeIcon, LeftContainer, NotifIcon, ProfileImg, PublishButton, SearchBox, SearchInput, WriteBox } from './header-style';
+import { Container, EditCTA, HomeIcon, LeftContainer, ProfileImg, PublishButton, SearchBox, SearchInput, WriteBox } from './header-style';
 import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import { useEffect } from 'react';
 import { fetchUserDetailsUseCase } from '../../lib/data-service';
@@ -15,15 +13,17 @@ export const Header = () => {
     const [showSearchBox, setShowSearchBox] = useState(false)
     const [showPublishBtn, setShowPublishBtn] = useState(false)
 
+    const articleId = useSelector(state => state.global.articleId)
+
     const fetchUserDetails = () => {
         fetchUserDetailsUseCase().then(data => setUser(data))
     }
 
     const handleHeaderItems = () => {
-        const isEditing = window.location.pathname.includes('new-story')
+        const isEditing = window.location.pathname.includes('story')
         setShowWriteBox(!isEditing)
         setShowSearchBox(!isEditing)
-        setShowPublishBtn(isEditing)
+        setShowPublishBtn(articleId)
     }
     const handlePublish = () => {
         dispatch(publishArticle())
@@ -31,7 +31,7 @@ export const Header = () => {
     useEffect(() => {
         fetchUserDetails()
         handleHeaderItems()
-    }, [])
+    }, [articleId])
 
     return (
         <Container>
