@@ -104,7 +104,6 @@ export const Story = () => {
                         .then(data => {
                             if (data.article.blocks.length) {
                                 editorData.blocks = data.article.blocks
-                                console.log(editorData)
                                 editor.render(editorData)
                             }
                         })

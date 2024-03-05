@@ -70,7 +70,7 @@ export const postBlockUseCase = (block) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(block)
-        }).then(console.log);
+        }).then();
     } catch (error) {
         console.error('postBlockUseCase', error);
     }
@@ -81,7 +81,7 @@ export const deleteBlockUseCase = (block) => {
         const networkHost = NETWORK.HOST;
         const url = networkHost.replace('operationId', 'deleteBlock');
         fetch(`${url}/${block.articleId}/${block.id}`)
-            .then(console.log);
+            .then();
     } catch (error) {
         console.error('postBlockUseCase', error);
     }
@@ -95,7 +95,7 @@ export const patchArticleUseCase = (articleId, blockIds) => {
             method: 'PATCH',
             body: JSON.stringify({ blockIds: blockIds })
         })
-            .then(console.log);
+            .then();
     } catch (error) {
         console.error('patchArticleUseCase', error);
     }
