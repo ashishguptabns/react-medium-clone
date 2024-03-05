@@ -1,5 +1,7 @@
+import { useState } from "react"
 import { ShimmerDiv } from "../../../../ui/loading/shimmer-div"
 import { Container, CenteredRow, ProfileImg, UpdatedTime, UserName, Heading, Description, ArticleImage } from "./article-style"
+import { useEffect } from "react"
 
 const PlaceholderArticle = () => {
     return (
@@ -19,22 +21,39 @@ const PlaceholderArticle = () => {
     )
 }
 export const Article = ({ article }) => {
+    const [title, setTitle] = useState('')
+    const [desc, setDesc] = useState('')
+
+    useEffect(() => {
+        if (article && article.blocks) {
+            for (const block of article.blocks) {
+                if (block.type === 'header') {
+                    setTitle(block.data.text)
+                }
+                if (block.type === 'paragraph') {
+                    setDesc(block.data.text)
+                    break
+                }
+            }
+        }
+    }, [])
+
     return (
         <>
-            {!article.title && <PlaceholderArticle />}
-            {article.title && <Container>
+            {!title && <PlaceholderArticle />}
+            {title && <Container href={`/story/${article.id}`}>
                 <CenteredRow>
                     <ProfileImg src={article.usrImgUrl} />
                     <UserName>{article.username}</UserName>
-                    <UpdatedTime>{article.updatedAt}</UpdatedTime>
+                    {/* <UpdatedTime>{article.updatedAt}</UpdatedTime> */}
                 </CenteredRow>
                 <CenteredRow>
                     <div>
                         <Heading>
-                            {article.title}
+                            {title}
                         </Heading>
                         <Description>
-                            {article.desc}
+                            {desc}
                         </Description>
                     </div>
                     <ArticleImage src={article.imgUrl} />

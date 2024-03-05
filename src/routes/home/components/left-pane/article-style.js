@@ -1,11 +1,13 @@
 import styled from "styled-components"
 
-export const Container = styled.div`
+export const Container = styled.a`
     cursor: pointer;
     max-height: 340px;
     margin: 0 24px 10px 24px;
     padding-bottom: 10px;
     border-bottom: solid 1px #e8e2e2;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
 `
 export const CenteredRow = styled.div`
     display: flex;
@@ -49,5 +51,4 @@ export const ArticleImage = styled.img`
     height: 112px;
     margin-left: 20px;
     border-radius: 10px;
-    background: #f6f7f8;
 `

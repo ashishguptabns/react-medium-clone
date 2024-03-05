@@ -16,7 +16,8 @@ export const ListArticles = () => {
 
     const fetchArticles = () => {
         setArticles(blankArticles)
-        fetchArticlesUseCase(currTab).then(data => setArticles(data))
+        fetchArticlesUseCase(currTab)
+            .then(data => setArticles(data))
     }
     useEffect(() => {
         fetchArticles()
