@@ -32,6 +32,19 @@ export const fetchArticlesUseCase = async (tag) => {
     return data
 }
 
+export const fetchArticleUseCase = async (id) => {
+    let data
+    try {
+        const networkHost = NETWORK.HOST;
+        const url = networkHost.replace('operationId', 'getArticle');
+        const res = await fetch(`${url}?id=${id}`);
+        data = (await res.json());
+    } catch (error) {
+        console.error('fetchArticleUseCase', error);
+    }
+    return data
+}
+
 export const postArticleUseCase = async () => {
     let data
     try {
