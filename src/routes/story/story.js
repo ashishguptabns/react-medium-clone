@@ -50,11 +50,11 @@ export const Story = () => {
     const handleDeletedBlock = (blockData) => {
         deleteBlockUseCase(blockData)
     }
-    const handleEditorChange = async (api, event) => {
-        await handleArticleCreation()
-        const blockData = await new Promise((res) => {
-            const block = api.blocks.getBlockByIndex(api.blocks.getCurrentBlockIndex())
-            block.save().then(data => res(data))
+    const handleEvent = async (api, event) => {
+        const blockId = event.detail.target.id
+        const blockData = event.type === 'block-removed' ? { id: blockId } : await new Promise((resolve) => {
+            const block = api.blocks.getById(blockId)
+            block.save().then(data => resolve(data))
         })
         blockData.articleId = articleId
         switch (event.type) {
@@ -62,17 +62,26 @@ export const Story = () => {
                 handleChangedBlock(blockData)
                 break
             case 'block-added':
-                handleMovedBlock()
                 handleAddedBlock(blockData)
                 break
             case 'block-removed':
-                handleMovedBlock()
                 handleDeletedBlock(blockData)
                 break
             case 'block-moved':
-                handleMovedBlock()
                 break
         }
+        handleMovedBlock()
+    }
+    const handleEditorChange = async (api, event) => {
+        await handleArticleCreation()
+        if (Array.isArray(event)) {
+            for (const eve of event) {
+                handleEvent(api, eve)
+            }
+        } else {
+            handleEvent(api, event)
+        }
+
     }
     const editorConfig = {
         holder: 'editorjs',
