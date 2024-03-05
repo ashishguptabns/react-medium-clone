@@ -1,5 +1,5 @@
 import { NETWORK } from "./constants";
-import { articles, currUser, tabs } from "./mock-data"
+import { currUser, tabs } from "./mock-data"
 
 export const fetchUserDetailsUseCase = async () => {
     const data = await new Promise((res, rej) => {
@@ -80,7 +80,7 @@ export const patchArticleUseCase = (articleId, blockIds) => {
         const url = networkHost.replace('operationId', 'patchArticle');
         fetch(`${url}/${articleId}`, {
             method: 'PATCH',
-            body: JSON.stringify({ blocksIds: blockIds })
+            body: JSON.stringify({ blockIds: blockIds })
         })
             .then(console.log);
     } catch (error) {

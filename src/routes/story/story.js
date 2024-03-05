@@ -34,7 +34,7 @@ export const Story = () => {
     const handleAddedBlock = (blockData) => {
         postBlockUseCase(blockData)
     }
-    const handleMovedBlock = (blockData) => {
+    const handleMovedBlock = () => {
         editor.save()
             .then((outputData) => {
                 const blocks = outputData.blocks
@@ -62,13 +62,15 @@ export const Story = () => {
                 handleChangedBlock(blockData)
                 break
             case 'block-added':
+                handleMovedBlock()
                 handleAddedBlock(blockData)
                 break
             case 'block-removed':
+                handleMovedBlock()
                 handleDeletedBlock(blockData)
                 break
             case 'block-moved':
-                handleMovedBlock(blockData)
+                handleMovedBlock()
                 break
         }
     }
