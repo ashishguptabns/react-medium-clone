@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { ShimmerDiv } from "../../../../ui/loading/shimmer-div"
-import { Container, CenteredRow, ProfileImg, UpdatedTime, UserName, Heading, Description, ArticleImage } from "./article-style"
+import { Container, CenteredRow, ProfileImg, UpdatedTime, UserName, Heading, Description, ArticleImage, HrefContainer } from "./article-style"
 import { useEffect } from "react"
 
 const PlaceholderArticle = () => {
@@ -41,24 +41,26 @@ export const Article = ({ article }) => {
     return (
         <>
             {!title && <PlaceholderArticle />}
-            {title && <Container href={`/story/${article.id}`}>
-                <CenteredRow>
-                    <ProfileImg src={article.usrImgUrl} />
-                    <UserName>{article.username}</UserName>
-                    {/* <UpdatedTime>{article.updatedAt}</UpdatedTime> */}
-                </CenteredRow>
-                <CenteredRow>
-                    <div>
-                        <Heading>
-                            {title}
-                        </Heading>
-                        <Description>
-                            {desc}
-                        </Description>
-                    </div>
-                    <ArticleImage src={article.imgUrl} />
-                </CenteredRow>
-            </Container>}
+            {title && <HrefContainer href={`/story/${article.id}`}>
+                <Container>
+                    <CenteredRow>
+                        <ProfileImg src={article.usrImgUrl} />
+                        <UserName>{article.username}</UserName>
+                        {/* <UpdatedTime>{article.updatedAt}</UpdatedTime> */}
+                    </CenteredRow>
+                    <CenteredRow>
+                        <div>
+                            <Heading>
+                                {title}
+                            </Heading>
+                            <Description>
+                                {desc}
+                            </Description>
+                        </div>
+                        <ArticleImage src={article.imgUrl} />
+                    </CenteredRow>
+                </Container>
+            </HrefContainer>}
         </>
     )
 }

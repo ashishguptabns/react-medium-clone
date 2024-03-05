@@ -1,13 +1,15 @@
 import styled from "styled-components"
 
-export const Container = styled.a`
+export const HrefContainer = styled.a`
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+`
+export const Container = styled.div`
     cursor: pointer;
     max-height: 340px;
     margin: 0 24px 10px 24px;
     padding-bottom: 10px;
     border-bottom: solid 1px #e8e2e2;
-    -webkit-tap-highlight-color: transparent;
-    text-decoration: none;
 `
 export const CenteredRow = styled.div`
     display: flex;

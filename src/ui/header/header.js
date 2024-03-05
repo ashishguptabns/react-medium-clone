@@ -50,7 +50,9 @@ export const Header = () => {
                 <NotificationImportantOutlinedIcon />
             </NotifIcon> */}
             {showPublishBtn && <PublishButton onClick={handlePublish}>Publish</PublishButton>}
-            <ProfileImg src={user.imgUrl || 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'} href='/profile' />
+            <a href="https://www.linkedin.com/in/ashishguptabns/" target="_blank" rel="noopener noreferrer">
+                <ProfileImg src={user.imgUrl || 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'} />
+            </a>
         </Container>
     )
 }
