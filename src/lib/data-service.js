@@ -31,3 +31,18 @@ export const fetchArticlesUseCase = async (tag) => {
     }
     return data
 }
+
+export const postArticleUseCase = async () => {
+    let data
+    try {
+        const networkHost = NETWORK.HOST;
+        const url = networkHost.replace('operationId', 'postArticle');
+        const res = await fetch(url, {
+            method: 'POST'
+        });
+        data = (await res.json());
+    } catch (error) {
+        console.error('postArticleUseCase', error);
+    }
+    return data
+}

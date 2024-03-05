@@ -2,63 +2,60 @@ import styled from 'styled-components'
 import * as React from 'react';
 import EditorJS from '@editorjs/editorjs';
 import { useEffect } from 'react';
-import { editorTools } from './helper';
+import { editorTools, startData } from './helper';
+import { useState } from 'react';
+import { postArticleUseCase } from '../../lib/data-service';
 
 let editor
 
 const Container = styled.div`
     padding: 24px;
 `
-const handleChange = (api, event) => {
-    editor.save().then((outputData) => {
-        console.log(outputData)
-    }).catch((error) => {
-        console.log('handleChange ', error)
-    });
-}
-const editorConfig = {
-    holder: 'editorjs',
-    tools: editorTools,
-    data: {
-        "time": 1709582255668,
-        "blocks": [
-            {
-                "id": "oUq2g_tl8y",
-                "type": "header",
-                "data": {
-                    "text": "Modify this headline to start..",
-                    "level": 2
-                }
-            },
-            {
-                "id": "pBH41kPPLD",
-                "type": "delimiter",
-                "data": {}
-            },
-            {
-                "id": "zbGZFPM-iI",
-                "type": "paragraph",
-                "data": {
-                    "text": "To play around with blocks, try putting your cursor on the left side and you will find the dropdowns!"
-                }
-            }
-        ],
-        "version": "2.29.0"
-    },
-    onReady: () => {
-        console.log('Editor.js is ready to work!')
-    },
-    onChange: handleChange,
-    autofocus: false,
-    placeholder: 'Write your content here.',
-    logLevel: 'ERROR',
-    readOnly: false,
-    inlineToolbar: ['link', 'bold', 'italic'],
-}
-export const NewStory = () => {
 
+export const NewStory = () => {
+    const [articleId, setArticleId] = useState()
+
+    const handleArticleCreation = async () => {
+        if (!articleId) {
+            const id = (await postArticleUseCase()).id
+            setArticleId(id)
+            window.history.replaceState({}, '', `story/${id}`);
+        }
+    }
+    const handleEditorChange = async (api, event) => {
+        await handleArticleCreation()
+        const blockData = await new Promise((res) => {
+            const block = api.blocks.getBlockByIndex(api.blocks.getCurrentBlockIndex())
+            block.save().then(data => res(data))
+        })
+        switch (event.type) {
+            case 'block-changed':
+                console.log(event.type, blockData)
+                break
+            case 'block-added':
+                console.log(event.type, blockData)
+                break
+            case 'block-removed':
+                console.log(event.type, blockData)
+                break
+            case 'block-moved':
+                console.log(event.type, blockData)
+                break
+        }
+    }
+    const editorConfig = {
+        holder: 'editorjs',
+        tools: editorTools,
+        data: startData,
+        onChange: handleEditorChange,
+        autofocus: false,
+        placeholder: 'Write your content here.',
+        logLevel: 'ERROR',
+        readOnly: false,
+        inlineToolbar: ['link', 'bold', 'italic'],
+    }
     useEffect(() => {
-        document.title = 'Share your coding knowledge';
+        document.title = 'Share your knowledge';
         if (!editor) {
             editor = new EditorJS(editorConfig)
         }
