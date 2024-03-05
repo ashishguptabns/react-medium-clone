@@ -87,13 +87,13 @@ export const deleteBlockUseCase = (block) => {
     }
 }
 
-export const patchArticleUseCase = (articleId, blockIds) => {
+export const patchArticleUseCase = (articleId, payload) => {
     try {
         const networkHost = NETWORK.HOST;
         const url = networkHost.replace('operationId', 'patchArticle');
         fetch(`${url}/${articleId}`, {
             method: 'PATCH',
-            body: JSON.stringify({ blockIds: blockIds })
+            body: JSON.stringify(payload)
         })
             .then();
     } catch (error) {

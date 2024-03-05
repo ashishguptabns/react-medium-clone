@@ -8,11 +8,36 @@ import { useDispatch } from 'react-redux'
 import { setArticleId } from '../../global-slice';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { tabs } from '../../lib/mock-data';
 
 let editor, editorData = {}
 
+const Tag = styled.div`
+    cursor: pointer;
+    border: solid 1px #F2F2F2;
+    padding: 4px 10px;
+    text-align: center;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    width: fit-content;
+    color: ${props => props.$isSelected ? '#242424' : 'gray'};
+    background: ${props => props.$isSelected ? '#e1e1e1' : 'white'};
+`
+const Tags = styled.div`
+    width: 300px;
+    border-left: solid 1px #F2F2F2;
+    padding: 30px 20px;
+    text-align: -webkit-center;
+    @media(max-width: 700px){
+        display: none;
+    }
+`
 const Container = styled.div`
+    display: flex;
+`
+const Editor = styled.div`
     padding: 24px;
+    width: 100%;
 `
 
 export const Story = () => {
@@ -43,7 +68,7 @@ export const Story = () => {
                 for (const block of blocks) {
                     blockIds.push(block.id)
                 }
-                patchArticleUseCase(articleId, blockIds)
+                patchArticleUseCase(articleId, { blockIds: blockIds })
             }).catch((error) => {
                 console.log('handleMovedBlock', error)
             });
@@ -104,6 +129,8 @@ export const Story = () => {
     }, [title])
 
     const handleEditorData = (data) => {
+        console.log(data.article.tags)
+        setTags(data.article.tags)
         if (data.article.blocks.length) {
             editorData.blocks = data.article.blocks
             for (const block of editorData.blocks) {
@@ -130,7 +157,27 @@ export const Story = () => {
 
     }, [articleId])
 
+    const [tags, setTags] = useState([])
+    const handleTagClick = (tag) => {
+        tag = tag.title.toLowerCase()
+        setTags(prevTags => {
+            let tags
+            if (prevTags.includes(tag)) {
+                tags = prevTags.filter(t => t !== tag);
+            } else {
+                tags = [...prevTags, tag];
+            }
+            patchArticleUseCase(articleId, { tags: tags })
+            return tags
+        });
+    }
+
     return (
-        <Container id='editorjs' />
+        <Container>
+            <Editor id='editorjs' />
+            <Tags>
+                {tabs.map(tag => <Tag $isSelected={tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
+            </Tags>
+        </Container>
     )
 }
