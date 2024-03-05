@@ -51,6 +51,9 @@ export const Story = () => {
         deleteBlockUseCase(blockData)
     }
     const handleEvent = async (api, event) => {
+        if (editor.configuration.readOnly) {
+            return
+        }
         const blockId = event.detail.target.id
         const blockData = event.type === 'block-removed' ? { id: blockId } : await new Promise((resolve) => {
             const block = api.blocks.getById(blockId)
@@ -91,7 +94,7 @@ export const Story = () => {
         autofocus: false,
         placeholder: 'Write your content here.',
         logLevel: 'ERROR',
-        readOnly: false,
+        readOnly: process.env.NODE_ENV !== "development",
         inlineToolbar: ['link', 'bold', 'italic'],
     }
     useEffect(() => {
