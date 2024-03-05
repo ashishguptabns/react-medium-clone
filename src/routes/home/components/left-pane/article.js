@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { ShimmerDiv } from "../../../../ui/loading/shimmer-div"
-import { Container, CenteredRow, ProfileImg, UpdatedTime, UserName, Heading, Description, ArticleImage, HrefContainer } from "./article-style"
+import { Container, CenteredRow, ProfileImg, UpdatedTime, UserName, Heading, Description, ArticleImage, HrefContainer, ArticleTextContainer } from "./article-style"
 import { useEffect } from "react"
 
 const PlaceholderArticle = () => {
@@ -49,14 +49,14 @@ export const Article = ({ article }) => {
                         {/* <UpdatedTime>{article.updatedAt}</UpdatedTime> */}
                     </CenteredRow>
                     <CenteredRow>
-                        <div>
+                        <ArticleTextContainer>
                             <Heading>
                                 {title}
                             </Heading>
                             <Description>
                                 {desc}
                             </Description>
-                        </div>
+                        </ArticleTextContainer>
                         <ArticleImage src={article.imgUrl} />
                     </CenteredRow>
                 </Container>

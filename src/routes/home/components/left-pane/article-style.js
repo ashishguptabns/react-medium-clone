@@ -54,3 +54,6 @@ export const ArticleImage = styled.img`
     margin-left: 20px;
     border-radius: 10px;
 `
+export const ArticleTextContainer = styled.div`
+    width: 100%;
+`
