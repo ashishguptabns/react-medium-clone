@@ -25,7 +25,7 @@ export const ListArticles = () => {
 
     return (
         <Container>
-            {articles && articles.length && articles.map(article => <Article key={article.id} article={article} />)}
+            {articles && articles.length > 0 && articles.map(article => <Article key={article.id} article={article} />)}
         </Container>
     )
 }
