@@ -3,7 +3,7 @@ import * as React from 'react';
 import EditorJS from '@editorjs/editorjs';
 import { useEffect } from 'react';
 import { editorTools, startData } from './helper';
-import { postArticleUseCase, postBlockUseCase } from '../../lib/data-service';
+import { deleteBlockUseCase, patchArticleUseCase, postArticleUseCase, postBlockUseCase } from '../../lib/data-service';
 import { useDispatch } from 'react-redux'
 import { setArticleId } from '../../global-slice';
 import { useParams } from 'react-router-dom';
@@ -29,16 +29,26 @@ export const Story = () => {
         }
     }
     const handleChangedBlock = (blockData) => {
-
+        postBlockUseCase(blockData)
     }
     const handleAddedBlock = (blockData) => {
         postBlockUseCase(blockData)
     }
     const handleMovedBlock = (blockData) => {
-
+        editor.save()
+            .then((outputData) => {
+                const blocks = outputData.blocks
+                const blockIds = []
+                for (const block of blocks) {
+                    blockIds.push(block.id)
+                }
+                patchArticleUseCase(articleId, blockIds)
+            }).catch((error) => {
+                console.log('handleMovedBlock', error)
+            });
     }
     const handleDeletedBlock = (blockData) => {
-
+        deleteBlockUseCase(blockData)
     }
     const handleEditorChange = async (api, event) => {
         await handleArticleCreation()
@@ -46,6 +56,7 @@ export const Story = () => {
             const block = api.blocks.getBlockByIndex(api.blocks.getCurrentBlockIndex())
             block.save().then(data => res(data))
         })
+        blockData.articleId = articleId
         switch (event.type) {
             case 'block-changed':
                 handleChangedBlock(blockData)

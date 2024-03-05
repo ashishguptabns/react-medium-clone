@@ -62,3 +62,28 @@ export const postBlockUseCase = (block) => {
         console.error('postBlockUseCase', error);
     }
 }
+
+export const deleteBlockUseCase = (block) => {
+    try {
+        const networkHost = NETWORK.HOST;
+        const url = networkHost.replace('operationId', 'deleteBlock');
+        fetch(`${url}/${block.articleId}/${block.id}`)
+            .then(console.log);
+    } catch (error) {
+        console.error('postBlockUseCase', error);
+    }
+}
+
+export const patchArticleUseCase = (articleId, blockIds) => {
+    try {
+        const networkHost = NETWORK.HOST;
+        const url = networkHost.replace('operationId', 'patchArticle');
+        fetch(`${url}/${articleId}`, {
+            method: 'PATCH',
+            body: JSON.stringify({ blocksIds: blockIds })
+        })
+            .then(console.log);
+    } catch (error) {
+        console.error('patchArticleUseCase', error);
+    }
+}
