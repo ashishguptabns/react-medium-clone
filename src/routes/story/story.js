@@ -12,14 +12,14 @@ const Container = styled.div`
     padding: 24px;
 `
 
-export const NewStory = () => {
+export const Story = () => {
     const [articleId, setArticleId] = useState()
 
     const handleArticleCreation = async () => {
         if (!articleId) {
             const id = (await postArticleUseCase()).id
             setArticleId(id)
-            window.history.replaceState({}, '', `story/${id}`);
+            window.history.replaceState({}, '', `${id}`);
         }
     }
     const handleEditorChange = async (api, event) => {

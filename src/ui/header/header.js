@@ -42,7 +42,7 @@ export const Header = () => {
                     <SearchInput placeholder='Search' />
                 </SearchBox>}
             </LeftContainer>
-            {showWriteBox && <WriteBox href='/new-story'>
+            {showWriteBox && <WriteBox href='/story/'>
                 <EditNoteOutlinedIcon />
                 <EditCTA>Write</EditCTA>
             </WriteBox>}

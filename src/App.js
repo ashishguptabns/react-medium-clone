@@ -2,7 +2,7 @@ import './App.css';
 import { Home } from './routes/home/home';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Header } from './ui/header/header';
-import { NewStory } from './routes/new-story/new-story';
+import { Story } from './routes/story/story';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/new-story" element={<NewStory />} />
+          <Route path="/story/:id?" element={<Story />} />
         </Routes>
       </Router>
     </>
