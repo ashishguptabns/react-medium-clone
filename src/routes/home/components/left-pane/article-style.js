@@ -30,22 +30,33 @@ export const UpdatedTime = styled.p`
     font-size: 14px;
 `
 export const Heading = styled.h2`
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
     max-height: 72px;
     line-height: 24px;
     font-size: 20px;
     color: #242424;
     overflow: hidden;
     margin: 0;
+    @media (max-width: 700px) {
+        font-size: 16px;
+    }
 `
 export const Description = styled.p`
     -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
     max-height: 72px;
     line-height: 24px;
     font-size: 16px;
     color: #242424;
     margin: 6px 0;
     overflow: hidden;
+    @media (max-width: 700px) {
+        font-size: 14px;
+        -webkit-line-clamp: 2;
+    }
 `
 export const ArticleImage = styled.img`
     width: 112px;
@@ -53,6 +64,11 @@ export const ArticleImage = styled.img`
     height: 112px;
     margin-left: 20px;
     border-radius: 10px;
+    @media (max-width: 700px) {
+        width: 80px;
+        aspect-ratio: auto 1;
+        height: 80px;
+    }
 `
 export const ArticleTextContainer = styled.div`
     width: 100%;

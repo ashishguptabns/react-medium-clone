@@ -7,6 +7,7 @@ import { deleteBlockUseCase, fetchArticleUseCase, patchArticleUseCase, postArtic
 import { useDispatch } from 'react-redux'
 import { setArticleId } from '../../global-slice';
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 
 let editor, editorData = {}
 
@@ -84,7 +85,6 @@ export const Story = () => {
         } else {
             handleEvent(api, event)
         }
-
     }
     const editorConfig = {
         holder: 'editorjs',
@@ -97,19 +97,31 @@ export const Story = () => {
         readOnly: process.env.NODE_ENV !== "development",
         inlineToolbar: ['link', 'bold', 'italic'],
     }
+
+    const [title, setTitle] = useState('Share your knowledge')
     useEffect(() => {
-        document.title = 'Share your knowledge';
+        document.title = title;
+    }, [title])
+
+    const handleEditorData = (data) => {
+        if (data.article.blocks.length) {
+            editorData.blocks = data.article.blocks
+            for (const block of editorData.blocks) {
+                if (block.type === 'header') {
+                    setTitle(block.data.text)
+                    break
+                }
+            }
+            editor.render(editorData)
+        }
+    }
+    useEffect(() => {
         if (!editor) {
             editor = new EditorJS(editorConfig)
             setTimeout(() => {
                 if (articleId) {
                     fetchArticleUseCase(articleId)
-                        .then(data => {
-                            if (data.article.blocks.length) {
-                                editorData.blocks = data.article.blocks
-                                editor.render(editorData)
-                            }
-                        })
+                        .then(handleEditorData)
                 } else {
                     editor.render(startData)
                 }
