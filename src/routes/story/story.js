@@ -3,12 +3,12 @@ import * as React from 'react';
 import EditorJS from '@editorjs/editorjs';
 import { useEffect } from 'react';
 import { editorTools, startData } from './helper';
-import { deleteBlockUseCase, patchArticleUseCase, postArticleUseCase, postBlockUseCase } from '../../lib/data-service';
+import { deleteBlockUseCase, fetchArticleUseCase, patchArticleUseCase, postArticleUseCase, postBlockUseCase } from '../../lib/data-service';
 import { useDispatch } from 'react-redux'
 import { setArticleId } from '../../global-slice';
 import { useParams } from 'react-router-dom';
 
-let editor
+let editor, editorData = {}
 
 const Container = styled.div`
     padding: 24px;
@@ -77,7 +77,7 @@ export const Story = () => {
     const editorConfig = {
         holder: 'editorjs',
         tools: editorTools,
-        data: startData,
+        data: editorData,
         onChange: handleEditorChange,
         autofocus: false,
         placeholder: 'Write your content here.',
@@ -89,8 +89,23 @@ export const Story = () => {
         document.title = 'Share your knowledge';
         if (!editor) {
             editor = new EditorJS(editorConfig)
+            setTimeout(() => {
+                if (articleId) {
+                    fetchArticleUseCase(articleId)
+                        .then(data => {
+                            if (data.article.blocks.length) {
+                                editorData.blocks = data.article.blocks
+                                console.log(editorData)
+                                editor.render(editorData)
+                            }
+                        })
+                } else {
+                    editor.render(startData)
+                }
+            }, 100);
         }
-    }, [])
+
+    }, [articleId])
 
     return (
         <Container id='editorjs' />
