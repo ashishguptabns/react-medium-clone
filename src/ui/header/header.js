@@ -23,7 +23,7 @@ export const Header = () => {
         const isEditing = window.location.pathname.includes('story')
         setShowWriteBox(!isEditing && process.env.NODE_ENV === "development")
         setShowSearchBox(!isEditing)
-        setShowPublishBtn(articleId && process.env.NODE_ENV === "development")
+        // setShowPublishBtn(articleId && process.env.NODE_ENV === "development")
     }
     const handlePublish = () => {
         dispatch(publishArticle())
