@@ -173,9 +173,9 @@ export const Story = () => {
     return (
         <Container>
             <Editor id='editorjs' />
-            <Tags>
+            {process.env.NODE_ENV === "development" && <Tags>
                 {tabs.map(tag => <Tag $isSelected={tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
-            </Tags>
+            </Tags>}
         </Container>
     )
 }
