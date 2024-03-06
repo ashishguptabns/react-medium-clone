@@ -23,7 +23,7 @@ export const fetchArticlesUseCase = async (tag) => {
     let data
     try {
         const networkHost = NETWORK.HOST;
-        const url = networkHost.replace('operationId', 'getArticles');
+        const url = networkHost.replace('operationId', 'articles');
         const res = await fetch(url + `?tag=${tag}`);
         data = (await res.json());
     } catch (error) {
@@ -36,8 +36,8 @@ export const fetchArticleUseCase = async (id) => {
     let data
     try {
         const networkHost = NETWORK.HOST;
-        const url = networkHost.replace('operationId', 'getArticle');
-        const res = await fetch(`${url}?id=${id}`);
+        const url = networkHost.replace('operationId', 'article');
+        const res = await fetch(`${url}/${id}`);
         data = (await res.json());
     } catch (error) {
         console.error('fetchArticleUseCase', error);
@@ -49,7 +49,7 @@ export const postArticleUseCase = async () => {
     let data
     try {
         const networkHost = NETWORK.HOST;
-        const url = networkHost.replace('operationId', 'postArticle');
+        const url = networkHost.replace('operationId', 'article');
         const res = await fetch(url, {
             method: 'POST'
         });
@@ -63,8 +63,8 @@ export const postArticleUseCase = async () => {
 export const postBlockUseCase = (block) => {
     try {
         const networkHost = NETWORK.HOST;
-        const url = networkHost.replace('operationId', 'postBlock');
-        fetch(url, {
+        const url = networkHost.replace('operationId', 'block');
+        fetch(`${url}/${block.id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -79,8 +79,10 @@ export const postBlockUseCase = (block) => {
 export const deleteBlockUseCase = (block) => {
     try {
         const networkHost = NETWORK.HOST;
-        const url = networkHost.replace('operationId', 'deleteBlock');
-        fetch(`${url}/${block.articleId}/${block.id}`)
+        const url = networkHost.replace('operationId', 'block');
+        fetch(`${url}/${block.articleId}/${block.id}`, {
+            method: 'DELETE',
+        })
             .then();
     } catch (error) {
         console.error('postBlockUseCase', error);
@@ -90,7 +92,7 @@ export const deleteBlockUseCase = (block) => {
 export const patchArticleUseCase = (articleId, payload) => {
     try {
         const networkHost = NETWORK.HOST;
-        const url = networkHost.replace('operationId', 'patchArticle');
+        const url = networkHost.replace('operationId', 'article');
         fetch(`${url}/${articleId}`, {
             method: 'PATCH',
             body: JSON.stringify(payload)
