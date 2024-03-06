@@ -130,7 +130,7 @@ export const Story = () => {
 
     const handleEditorData = (data) => {
         setTags(data.article.tags)
-        if (data.article.blocks.length) {
+        if (data.article.blocks && data.article.blocks.length) {
             editorData.blocks = data.article.blocks
             for (const block of editorData.blocks) {
                 if (block.type === 'header') {
