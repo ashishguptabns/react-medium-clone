@@ -38,3 +38,30 @@ export const editorTools = {
         inlineToolbar: true,
     },
 }
+
+export const startData = {
+    "time": 1709582255668,
+    "blocks": [
+        {
+            "id": "oUq2g_tl8y",
+            "type": "header",
+            "data": {
+                "text": "Modify this headline to start..",
+                "level": 2
+            }
+        },
+        {
+            "id": "pBH41kPPLD",
+            "type": "delimiter",
+            "data": {}
+        },
+        {
+            "id": "zbGZFPM-iI",
+            "type": "paragraph",
+            "data": {
+                "text": "To play around with blocks, try putting your cursor on the left side and you will find the dropdowns!"
+            }
+        }
+    ],
+    "version": "2.29.0"
+}

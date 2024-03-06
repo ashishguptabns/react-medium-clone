@@ -1,6 +1,4 @@
-import NotificationImportantOutlinedIcon from '@mui/icons-material/NotificationImportantOutlined';
-import SearchIcon from '@mui/icons-material/Search';
-import { Container, EditCTA, HomeIcon, LeftContainer, NotifIcon, ProfileImg, PublishButton, SearchBox, SearchInput, WriteBox } from './header-style';
+import { Container, EditCTA, HomeIcon, LeftContainer, ProfileImg, PublishButton, SearchBox, SearchInput, WriteBox } from './header-style';
 import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import { useEffect } from 'react';
 import { fetchUserDetailsUseCase } from '../../lib/data-service';
@@ -15,15 +13,17 @@ export const Header = () => {
     const [showSearchBox, setShowSearchBox] = useState(false)
     const [showPublishBtn, setShowPublishBtn] = useState(false)
 
+    const articleId = useSelector(state => state.global.articleId)
+
     const fetchUserDetails = () => {
         fetchUserDetailsUseCase().then(data => setUser(data))
     }
 
     const handleHeaderItems = () => {
-        const isEditing = window.location.pathname.includes('new-story')
-        setShowWriteBox(!isEditing)
+        const isEditing = window.location.pathname.includes('story')
+        setShowWriteBox(!isEditing && process.env.NODE_ENV === "development")
         setShowSearchBox(!isEditing)
-        setShowPublishBtn(isEditing)
+        // setShowPublishBtn(articleId && process.env.NODE_ENV === "development")
     }
     const handlePublish = () => {
         dispatch(publishArticle())
@@ -31,7 +31,7 @@ export const Header = () => {
     useEffect(() => {
         fetchUserDetails()
         handleHeaderItems()
-    }, [])
+    }, [articleId])
 
     return (
         <Container>
@@ -42,7 +42,7 @@ export const Header = () => {
                     <SearchInput placeholder='Search' />
                 </SearchBox>}
             </LeftContainer>
-            {showWriteBox && <WriteBox href='/new-story'>
+            {showWriteBox && <WriteBox href='/story/'>
                 <EditNoteOutlinedIcon />
                 <EditCTA>Write</EditCTA>
             </WriteBox>}
@@ -50,7 +50,9 @@ export const Header = () => {
                 <NotificationImportantOutlinedIcon />
             </NotifIcon> */}
             {showPublishBtn && <PublishButton onClick={handlePublish}>Publish</PublishButton>}
-            <ProfileImg src={user.imgUrl || 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'} href='/profile' />
+            <a href="https://www.linkedin.com/in/ashishguptabns/" target="_blank" rel="noopener noreferrer">
+                <ProfileImg src={user.imgUrl || 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'} />
+            </a>
         </Container>
     )
 }

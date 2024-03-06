@@ -8,6 +8,9 @@ import { blankArticles } from "../../../../lib/mock-data"
 
 const Container = styled.div`
     padding-top: 20px;
+    @media (min-width: 1200px) {
+        padding: 20px 0 0 40px;
+    }
 `
 
 export const ListArticles = () => {
@@ -16,7 +19,8 @@ export const ListArticles = () => {
 
     const fetchArticles = () => {
         setArticles(blankArticles)
-        fetchArticlesUseCase(currTab).then(data => setArticles(data))
+        fetchArticlesUseCase(currTab)
+            .then(data => setArticles(data))
     }
     useEffect(() => {
         fetchArticles()
@@ -24,7 +28,7 @@ export const ListArticles = () => {
 
     return (
         <Container>
-            {articles && articles.length && articles.map(article => <Article key={article.id} article={article} />)}
+            {articles && articles.length > 0 && articles.map(article => <Article key={article.id} article={article} />)}
         </Container>
     )
 }

@@ -6,9 +6,10 @@ export const currUser = {
 export const tabs = [
     { title: 'React', id: '3' },
     { title: 'Javascript', id: '4' },
+    { title: 'CSS', id: '10' },
     { title: 'Node', id: '5' },
     { title: 'System Design', id: '7' },
-    { title: 'DSA', id: '9' }
+    { title: 'DSA', id: '9' },
 ]
 export const blankTabs = [
     { id: '3' },
