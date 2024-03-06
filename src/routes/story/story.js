@@ -117,7 +117,6 @@ export const Story = () => {
         data: editorData,
         onChange: handleEditorChange,
         autofocus: false,
-        placeholder: 'Write your content here.',
         logLevel: 'ERROR',
         readOnly: process.env.NODE_ENV !== "development",
         inlineToolbar: ['link', 'bold', 'italic'],

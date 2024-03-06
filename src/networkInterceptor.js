@@ -13,7 +13,6 @@ export function removeInterceptor(interceptor) {
 
 export function interceptFetch() {
     const realFetch = window.fetch;
-    console.log(process.env)
     window.fetch = function (...args) {
         const [url, options = {}] = args;
         const modifiedOptions = {
