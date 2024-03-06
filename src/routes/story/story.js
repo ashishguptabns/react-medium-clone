@@ -127,10 +127,10 @@ export const Story = () => {
         document.title = title;
     }, [title])
 
-    const handleEditorData = (data) => {
-        setTags(data.article.tags)
-        if (data.article.blocks && data.article.blocks.length) {
-            editorData.blocks = data.article.blocks
+    const handleEditorData = (article) => {
+        setTags(article.tags)
+        if (article.blocks && article.blocks.length) {
+            editorData.blocks = article.blocks
             for (const block of editorData.blocks) {
                 if (block.type === 'header') {
                     setTitle(block.data.text)
