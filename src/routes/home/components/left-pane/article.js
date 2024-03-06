@@ -2,6 +2,7 @@ import { useState } from "react"
 import { ShimmerDiv } from "../../../../ui/loading/shimmer-div"
 import { Container, CenteredRow, ProfileImg, UpdatedTime, UserName, Heading, Description, ArticleImage, HrefContainer, ArticleTextContainer } from "./article-style"
 import { useEffect } from "react"
+import { htmlToPlainText } from "./helper"
 
 const PlaceholderArticle = () => {
     return (
@@ -31,7 +32,8 @@ export const Article = ({ article }) => {
                     setTitle(block.data.text)
                 }
                 if (block.type === 'paragraph') {
-                    setDesc(block.data.text)
+                    const plainText = htmlToPlainText(block.data.text);
+                    setDesc(plainText)
                     break
                 }
             }
