@@ -153,7 +153,7 @@ export const Story = () => {
             }, 100);
         }
 
-    }, [articleId])
+    }, [])
 
     const [tags, setTags] = useState([])
     const handleTagClick = (tag) => {
