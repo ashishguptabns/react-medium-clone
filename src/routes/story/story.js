@@ -129,7 +129,6 @@ export const Story = () => {
     }, [title])
 
     const handleEditorData = (data) => {
-        console.log(data.article.tags)
         setTags(data.article.tags)
         if (data.article.blocks.length) {
             editorData.blocks = data.article.blocks
