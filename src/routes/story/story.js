@@ -47,6 +47,8 @@ export const Story = () => {
         dispatch(setArticleId(articleId))
     }
 
+    let editorChanges = {}
+
     const handleArticleCreation = async () => {
         if (!articleId) {
             articleId = (await postArticleUseCase()).id
@@ -55,10 +57,12 @@ export const Story = () => {
         }
     }
     const handleChangedBlock = (blockData) => {
-        postBlockUseCase(blockData)
+        editorChanges[blockData.id] = { operation: 'add', block: blockData }
+        // postBlockUseCase(blockData)
     }
     const handleAddedBlock = (blockData) => {
-        postBlockUseCase(blockData)
+        editorChanges[blockData.id] = { operation: 'add', block: blockData }
+        // postBlockUseCase(blockData)
     }
     const handleMovedBlock = () => {
         editor.save()
@@ -74,8 +78,25 @@ export const Story = () => {
             });
     }
     const handleDeletedBlock = (blockData) => {
-        deleteBlockUseCase(blockData)
+        editorChanges[blockData.id] = { operation: 'delete', block: blockData }
+        // deleteBlockUseCase(blockData)
     }
+    const saveEditorChanges = () => {
+        console.log(editorChanges)
+        for (const key in editorChanges) {
+            switch (editorChanges[key].operation) {
+                case 'delete':
+                    deleteBlockUseCase(editorChanges[key].block)
+                    break
+                case 'add':
+                    postBlockUseCase(editorChanges[key].block)
+                    break
+            }
+        }
+        handleMovedBlock()
+        editorChanges = {}
+    }
+    let saveEditorTimer
     const handleEvent = async (api, event) => {
         if (editor.configuration.readOnly) {
             return
@@ -99,7 +120,12 @@ export const Story = () => {
             case 'block-moved':
                 break
         }
-        handleMovedBlock()
+        // handleMovedBlock()
+
+        clearTimeout(saveEditorTimer)
+        saveEditorTimer = setTimeout(() => {
+            saveEditorChanges()
+        }, 5000);
     }
     const handleEditorChange = async (api, event) => {
         await handleArticleCreation()
