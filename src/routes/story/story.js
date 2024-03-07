@@ -40,11 +40,13 @@ const Editor = styled.div`
     width: 100%;
 `
 
-export const Story = () => {
+export default function Story() {
     const dispatch = useDispatch()
     let articleId = useParams().id
     if (articleId) {
-        dispatch(setArticleId(articleId))
+        setTimeout(() => {
+            dispatch(setArticleId(articleId))
+        }, 1000);
     }
 
     let editorChanges = {}
