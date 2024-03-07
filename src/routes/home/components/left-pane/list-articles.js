@@ -9,7 +9,7 @@ import { blankArticles } from "../../../../lib/mock-data"
 const Container = styled.div`
     padding-top: 20px;
     @media (min-width: 1200px) {
-        padding: 20px 0 0 40px;
+        padding: 20px 0 0 60px;
     }
 `
 

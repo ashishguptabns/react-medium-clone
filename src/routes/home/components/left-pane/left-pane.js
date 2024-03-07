@@ -9,7 +9,7 @@ const Container = styled.div`
     width: 100%;
     padding: 10px 0;
     @media (min-width: 768px) {
-        width: 70%;
+        width: 60%;
         padding: 10px;
     }
 `

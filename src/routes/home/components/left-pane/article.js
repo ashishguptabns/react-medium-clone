@@ -59,10 +59,10 @@ export const Article = ({ article }) => {
                                 {desc}
                             </Description>
                         </ArticleTextContainer>
-                        <ArticleImg
+                        {/* <ArticleImg
                             alt={title}
                             loading="lazy"
-                            src={article.imgUrl} />
+                            src={article.imgUrl} /> */}
                     </CenteredRow>
                 </Container>
             </HrefContainer>}
