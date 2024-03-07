@@ -189,6 +189,7 @@ export default function Story() {
     const handleTagClick = (tag) => {
         tag = tag.title.toLowerCase()
         setTags(prevTags => {
+            prevTags = prevTags || []
             let tags
             if (prevTags.includes(tag)) {
                 tags = prevTags.filter(t => t !== tag);
@@ -204,7 +205,7 @@ export default function Story() {
         <Container>
             <Editor id='editorjs' />
             {process.env.NODE_ENV === "development" && <Tags>
-                {tabs.map(tag => <Tag $isSelected={tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
+                {tabs.map(tag => <Tag $isSelected={tags && tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
             </Tags>}
         </Container>
     )
