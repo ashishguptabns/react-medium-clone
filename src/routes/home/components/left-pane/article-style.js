@@ -58,7 +58,7 @@ export const Description = styled.p`
         -webkit-line-clamp: 2;
     }
 `
-export const ArticleImage = styled.img`
+export const ArticleImg = styled.img`
     width: 112px;
     aspect-ratio: auto 112 / 112;
     height: 112px;

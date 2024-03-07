@@ -51,7 +51,10 @@ export const Header = () => {
             </NotifIcon> */}
             {showPublishBtn && <PublishButton onClick={handlePublish}>Publish</PublishButton>}
             <a href="https://www.linkedin.com/in/ashishguptabns/" target="_blank" rel="noopener noreferrer">
-                <ProfileImg src={user.imgUrl || 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'} />
+                <ProfileImg
+                    alt='Profile Image'
+                    loading="lazy"
+                    src={user.imgUrl || 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png'} />
             </a>
         </Container>
     )

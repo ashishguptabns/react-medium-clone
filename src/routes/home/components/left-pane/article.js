@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { ShimmerDiv } from "../../../../ui/loading/shimmer-div"
-import { Container, CenteredRow, ProfileImg, UpdatedTime, UserName, Heading, Description, ArticleImage, HrefContainer, ArticleTextContainer } from "./article-style"
+import { Container, CenteredRow, ProfileImg, UpdatedTime, UserName, Heading, Description, ArticleImg, HrefContainer, ArticleTextContainer } from "./article-style"
 import { useEffect } from "react"
 import { htmlToPlainText } from "./helper"
 
@@ -16,7 +16,7 @@ const PlaceholderArticle = () => {
                     <ShimmerDiv w='100%' h='20px' />
                     <ShimmerDiv w='100%' h='100px' />
                 </div>
-                <ArticleImage />
+                <ArticleImg />
             </CenteredRow>
         </Container>
     )
@@ -59,7 +59,10 @@ export const Article = ({ article }) => {
                                 {desc}
                             </Description>
                         </ArticleTextContainer>
-                        <ArticleImage src={article.imgUrl} />
+                        <ArticleImg
+                            alt={title}
+                            loading="lazy"
+                            src={article.imgUrl} />
                     </CenteredRow>
                 </Container>
             </HrefContainer>}
