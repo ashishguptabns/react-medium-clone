@@ -104,7 +104,9 @@ export const Story = () => {
         const blockId = event.detail.target.id
         const blockData = event.type === 'block-removed' ? { id: blockId } : await new Promise((resolve) => {
             const block = api.blocks.getById(blockId)
-            block.save().then(data => resolve(data))
+            block.save()
+                .then(data => resolve(data))
+                .catch(console.log)
         })
         blockData.articleId = articleId
         switch (event.type) {
