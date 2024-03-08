@@ -7,10 +7,9 @@ import { deleteBlockUseCase, fetchArticleUseCase, patchArticleUseCase, postArtic
 import { useDispatch } from 'react-redux'
 import { setArticleId } from '../../global-slice';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { tabs } from '../../lib/mock-data';
-
-let editor, editorData = {}
+import { PlaceholderStory } from './story-placeholder';
 
 const Tag = styled.div`
     cursor: pointer;
@@ -40,11 +39,18 @@ const Editor = styled.div`
     width: 100%;
 `
 
-export const Story = () => {
+export default function Story() {
     const dispatch = useDispatch()
+
+    const editorRef = useRef()
+    const editorChangesRef = useRef({})
+    const editorDataRef = useRef({})
+
     let articleId = useParams().id
     if (articleId) {
-        dispatch(setArticleId(articleId))
+        setTimeout(() => {
+            dispatch(setArticleId(articleId))
+        }, 1000);
     }
 
     const handleArticleCreation = async () => {
@@ -55,13 +61,15 @@ export const Story = () => {
         }
     }
     const handleChangedBlock = (blockData) => {
-        postBlockUseCase(blockData)
+        editorChangesRef.current[blockData.id] = { operation: 'add', block: blockData }
+        // postBlockUseCase(blockData)
     }
     const handleAddedBlock = (blockData) => {
-        postBlockUseCase(blockData)
+        editorChangesRef.current[blockData.id] = { operation: 'add', block: blockData }
+        // postBlockUseCase(blockData)
     }
     const handleMovedBlock = () => {
-        editor.save()
+        editorRef.current.save()
             .then((outputData) => {
                 const blocks = outputData.blocks
                 const blockIds = []
@@ -74,16 +82,35 @@ export const Story = () => {
             });
     }
     const handleDeletedBlock = (blockData) => {
-        deleteBlockUseCase(blockData)
+        editorChangesRef.current[blockData.id] = { operation: 'delete', block: blockData }
+        // deleteBlockUseCase(blockData)
     }
+    const saveEditorChanges = () => {
+        console.log(editorChangesRef.current)
+        for (const key in editorChangesRef.current) {
+            switch (editorChangesRef.current[key].operation) {
+                case 'delete':
+                    deleteBlockUseCase(editorChangesRef.current[key].block)
+                    break
+                case 'add':
+                    postBlockUseCase(editorChangesRef.current[key].block)
+                    break
+            }
+        }
+        handleMovedBlock()
+        editorChangesRef.current = {}
+    }
+    const saveEditorTimerRef = useRef()
     const handleEvent = async (api, event) => {
-        if (editor.configuration.readOnly) {
+        if (editorRef.current.configuration.readOnly) {
             return
         }
         const blockId = event.detail.target.id
         const blockData = event.type === 'block-removed' ? { id: blockId } : await new Promise((resolve) => {
             const block = api.blocks.getById(blockId)
-            block.save().then(data => resolve(data))
+            block && block.save()
+                .then(data => resolve(data))
+                .catch(console.log)
         })
         blockData.articleId = articleId
         switch (event.type) {
@@ -99,7 +126,12 @@ export const Story = () => {
             case 'block-moved':
                 break
         }
-        handleMovedBlock()
+        // handleMovedBlock()
+
+        clearTimeout(saveEditorTimerRef.current)
+        saveEditorTimerRef.current = setTimeout(() => {
+            saveEditorChanges()
+        }, 5000);
     }
     const handleEditorChange = async (api, event) => {
         await handleArticleCreation()
@@ -114,10 +146,9 @@ export const Story = () => {
     const editorConfig = {
         holder: 'editorjs',
         tools: editorTools,
-        data: editorData,
+        data: editorDataRef.current,
         onChange: handleEditorChange,
         autofocus: false,
-        placeholder: 'Write your content here.',
         logLevel: 'ERROR',
         readOnly: process.env.NODE_ENV !== "development",
         inlineToolbar: ['link', 'bold', 'italic'],
@@ -128,39 +159,39 @@ export const Story = () => {
         document.title = title;
     }, [title])
 
-    const handleEditorData = (data) => {
-        console.log(data.article.tags)
-        setTags(data.article.tags)
-        if (data.article.blocks.length) {
-            editorData.blocks = data.article.blocks
-            for (const block of editorData.blocks) {
+    const handleEditorData = (article) => {
+        setTags(article.tags)
+        if (article.blocks && article.blocks.length) {
+            editorDataRef.current.blocks = article.blocks
+            for (const block of editorDataRef.current.blocks) {
                 if (block.type === 'header') {
                     setTitle(block.data.text)
                     break
                 }
             }
-            editor.render(editorData)
+            editorRef.current.render(editorDataRef.current)
         }
     }
     useEffect(() => {
-        if (!editor) {
-            editor = new EditorJS(editorConfig)
+        if (!editorRef.current) {
+            editorRef.current = new EditorJS(editorConfig)
             setTimeout(() => {
                 if (articleId) {
                     fetchArticleUseCase(articleId)
                         .then(handleEditorData)
                 } else {
-                    editor.render(startData)
+                    editorRef.current.render(startData)
                 }
             }, 100);
         }
 
-    }, [articleId])
+    }, [])
 
     const [tags, setTags] = useState([])
     const handleTagClick = (tag) => {
         tag = tag.title.toLowerCase()
         setTags(prevTags => {
+            prevTags = prevTags || []
             let tags
             if (prevTags.includes(tag)) {
                 tags = prevTags.filter(t => t !== tag);
@@ -175,9 +206,10 @@ export const Story = () => {
     return (
         <Container>
             <Editor id='editorjs' />
-            <Tags>
-                {tabs.map(tag => <Tag $isSelected={tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
-            </Tags>
+            {tags && tags.length <= 0 && articleId && <PlaceholderStory />}
+            {process.env.NODE_ENV === "development" && <Tags>
+                {tabs.map(tag => <Tag $isSelected={tags && tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
+            </Tags>}
         </Container>
     )
 }

@@ -8,8 +8,11 @@ export const Container = styled.div`
     cursor: pointer;
     max-height: 340px;
     margin: 0 24px 10px 24px;
-    padding-bottom: 10px;
+    padding: 10px 0;
     border-bottom: solid 1px #e8e2e2;
+    @media (max-width: 700px) {
+        padding: 0 0 10px 0;
+    }
 `
 export const CenteredRow = styled.div`
     display: flex;
@@ -58,7 +61,7 @@ export const Description = styled.p`
         -webkit-line-clamp: 2;
     }
 `
-export const ArticleImage = styled.img`
+export const ArticleImg = styled.img`
     width: 112px;
     aspect-ratio: auto 112 / 112;
     height: 112px;

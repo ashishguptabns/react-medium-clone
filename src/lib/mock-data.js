@@ -3,12 +3,18 @@ export const currUser = {
     imgUrl: 'https://miro.medium.com/v2/resize:fill:64:64/1*wMnxt9B3gQMzycxq4y7tYw.png'
 }
 
+export const desc = {
+    'React': `Dive deep into React's component-based architecture, learn to build dynamic user interfaces, and explore advanced concepts like state management and routing.`,
+    'JavaScript': `Solidify your foundation in JavaScript, the core language of web development. Grasp essential concepts like variables, functions, and object-oriented programming.`,
+    'System Design': `Learn to architect scalable and efficient web applications. Explore system design principles, tackle real-world coding challenges, and prepare for technical interviews.`
+}
+
 export const tabs = [
     { title: 'React', id: '3' },
     { title: 'Javascript', id: '4' },
+    { title: 'System Design', id: '7' },
     { title: 'CSS', id: '10' },
     { title: 'Node', id: '5' },
-    { title: 'System Design', id: '7' },
     { title: 'DSA', id: '9' },
 ]
 export const blankTabs = [

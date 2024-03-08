@@ -7,7 +7,7 @@ const HomeContainer = styled.div`
     display: flex;
     flex-direction: row;
 `
-export const Home = () => {
+export default function Home() {
     useEffect(() => {
         document.title = 'Coding Interview Guide';
     }, []);

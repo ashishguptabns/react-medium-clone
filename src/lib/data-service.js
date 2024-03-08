@@ -5,7 +5,7 @@ export const fetchUserDetailsUseCase = async () => {
     const data = await new Promise((res, rej) => {
         setTimeout(() => {
             res(currUser)
-        }, 2000);
+        }, 200);
     })
     return data
 }
@@ -14,7 +14,7 @@ export const fetchTabsUseCase = async () => {
     const data = await new Promise((res, rej) => {
         setTimeout(() => {
             res(tabs)
-        }, 2000);
+        }, 200);
     })
     return data
 }
