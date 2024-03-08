@@ -9,6 +9,7 @@ import { setArticleId } from '../../global-slice';
 import { useParams } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import { tabs } from '../../lib/mock-data';
+import { PlaceholderStory } from './story-placeholder';
 
 const Tag = styled.div`
     cursor: pointer;
@@ -205,6 +206,7 @@ export default function Story() {
     return (
         <Container>
             <Editor id='editorjs' />
+            {tags.length <= 0 && <PlaceholderStory />}
             {process.env.NODE_ENV === "development" && <Tags>
                 {tabs.map(tag => <Tag $isSelected={tags && tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
             </Tags>}
