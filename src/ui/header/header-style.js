@@ -17,7 +17,8 @@ export const HomeIcon = styled.a`
         display: inline-block;
         width: 40px; 
         height: 40px;
-        background-image: url('https://www.iconpacks.net/icons/2/free-medium-icon-2177-thumb.png');
+        background-image: url('/logo/50-logo.png');
+        border-radius: 50%;
         background-size: cover;
         aria-label="Home"; 
     `
