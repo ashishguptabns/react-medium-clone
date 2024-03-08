@@ -7,10 +7,8 @@ import { deleteBlockUseCase, fetchArticleUseCase, patchArticleUseCase, postArtic
 import { useDispatch } from 'react-redux'
 import { setArticleId } from '../../global-slice';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { tabs } from '../../lib/mock-data';
-
-let editor, editorData = {}
 
 const Tag = styled.div`
     cursor: pointer;
@@ -42,14 +40,17 @@ const Editor = styled.div`
 
 export default function Story() {
     const dispatch = useDispatch()
+
+    const editorRef = useRef()
+    const editorChangesRef = useRef({})
+    const editorDataRef = useRef({})
+
     let articleId = useParams().id
     if (articleId) {
         setTimeout(() => {
             dispatch(setArticleId(articleId))
         }, 1000);
     }
-
-    let editorChanges = {}
 
     const handleArticleCreation = async () => {
         if (!articleId) {
@@ -59,15 +60,15 @@ export default function Story() {
         }
     }
     const handleChangedBlock = (blockData) => {
-        editorChanges[blockData.id] = { operation: 'add', block: blockData }
+        editorChangesRef.current[blockData.id] = { operation: 'add', block: blockData }
         // postBlockUseCase(blockData)
     }
     const handleAddedBlock = (blockData) => {
-        editorChanges[blockData.id] = { operation: 'add', block: blockData }
+        editorChangesRef.current[blockData.id] = { operation: 'add', block: blockData }
         // postBlockUseCase(blockData)
     }
     const handleMovedBlock = () => {
-        editor.save()
+        editorRef.current.save()
             .then((outputData) => {
                 const blocks = outputData.blocks
                 const blockIds = []
@@ -80,27 +81,27 @@ export default function Story() {
             });
     }
     const handleDeletedBlock = (blockData) => {
-        editorChanges[blockData.id] = { operation: 'delete', block: blockData }
+        editorChangesRef.current[blockData.id] = { operation: 'delete', block: blockData }
         // deleteBlockUseCase(blockData)
     }
     const saveEditorChanges = () => {
-        console.log(editorChanges)
-        for (const key in editorChanges) {
-            switch (editorChanges[key].operation) {
+        console.log(editorChangesRef.current)
+        for (const key in editorChangesRef.current) {
+            switch (editorChangesRef.current[key].operation) {
                 case 'delete':
-                    deleteBlockUseCase(editorChanges[key].block)
+                    deleteBlockUseCase(editorChangesRef.current[key].block)
                     break
                 case 'add':
-                    postBlockUseCase(editorChanges[key].block)
+                    postBlockUseCase(editorChangesRef.current[key].block)
                     break
             }
         }
         handleMovedBlock()
-        editorChanges = {}
+        editorChangesRef.current = {}
     }
-    let saveEditorTimer
+    const saveEditorTimerRef = useRef()
     const handleEvent = async (api, event) => {
-        if (editor.configuration.readOnly) {
+        if (editorRef.current.configuration.readOnly) {
             return
         }
         const blockId = event.detail.target.id
@@ -126,8 +127,8 @@ export default function Story() {
         }
         // handleMovedBlock()
 
-        clearTimeout(saveEditorTimer)
-        saveEditorTimer = setTimeout(() => {
+        clearTimeout(saveEditorTimerRef.current)
+        saveEditorTimerRef.current = setTimeout(() => {
             saveEditorChanges()
         }, 5000);
     }
@@ -144,7 +145,7 @@ export default function Story() {
     const editorConfig = {
         holder: 'editorjs',
         tools: editorTools,
-        data: editorData,
+        data: editorDataRef.current,
         onChange: handleEditorChange,
         autofocus: false,
         logLevel: 'ERROR',
@@ -160,25 +161,25 @@ export default function Story() {
     const handleEditorData = (article) => {
         setTags(article.tags)
         if (article.blocks && article.blocks.length) {
-            editorData.blocks = article.blocks
-            for (const block of editorData.blocks) {
+            editorDataRef.current.blocks = article.blocks
+            for (const block of editorDataRef.current.blocks) {
                 if (block.type === 'header') {
                     setTitle(block.data.text)
                     break
                 }
             }
-            editor.render(editorData)
+            editorRef.current.render(editorDataRef.current)
         }
     }
     useEffect(() => {
-        if (!editor) {
-            editor = new EditorJS(editorConfig)
+        if (!editorRef.current) {
+            editorRef.current = new EditorJS(editorConfig)
             setTimeout(() => {
                 if (articleId) {
                     fetchArticleUseCase(articleId)
                         .then(handleEditorData)
                 } else {
-                    editor.render(startData)
+                    editorRef.current.render(startData)
                 }
             }, 100);
         }
