@@ -19,6 +19,7 @@ export const HomeIcon = styled.a`
         height: 40px;
         background-image: url('https://www.iconpacks.net/icons/2/free-medium-icon-2177-thumb.png');
         background-size: cover;
+        aria-label="Home"; 
     `
 export const SearchBox = styled.div`
         display: flex;

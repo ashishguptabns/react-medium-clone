@@ -8,7 +8,7 @@ const PlaceholderArticle = () => {
     return (
         <Container>
             <CenteredRow>
-                <ProfileImg src='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png' />
+                <ProfileImg src='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png' alt="placeholder"/>
                 <ShimmerDiv w='200px' h='20px' />
             </CenteredRow>
             <CenteredRow>
@@ -16,7 +16,7 @@ const PlaceholderArticle = () => {
                     <ShimmerDiv w='100%' h='20px' />
                     <ShimmerDiv w='100%' h='100px' />
                 </div>
-                <ArticleImg />
+                {/* <ArticleImg /> */}
             </CenteredRow>
         </Container>
     )
