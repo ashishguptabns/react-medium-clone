@@ -7,10 +7,10 @@ import { htmlToPlainText } from "./helper"
 const PlaceholderArticle = () => {
     return (
         <Container>
-            <CenteredRow>
-                <ProfileImg src='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png' alt="placeholder"/>
+            {/* <CenteredRow>
+                <ProfileImg src='https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png' alt="placeholder" />
                 <ShimmerDiv w='200px' h='20px' />
-            </CenteredRow>
+            </CenteredRow> */}
             <CenteredRow>
                 <div style={{ width: '100%' }}>
                     <ShimmerDiv w='100%' h='20px' />
@@ -43,13 +43,13 @@ export const Article = ({ article }) => {
     return (
         <>
             {!title && <PlaceholderArticle />}
-            {title && <HrefContainer href={`/story/${article.id}`}>
+            {title && <HrefContainer aria-label={title} href={`/story/${article.id}`}>
                 <Container>
-                    <CenteredRow>
-                        <ProfileImg src={article.usrImgUrl} />
+                    {/* <CenteredRow>
+                        <ProfileImg src={article.usrImgUrl} alt={`profile-img${title}`} />
                         <UserName>{article.username}</UserName>
-                        {/* <UpdatedTime>{article.updatedAt}</UpdatedTime> */}
-                    </CenteredRow>
+                        <UpdatedTime>{article.updatedAt}</UpdatedTime>
+                    </CenteredRow> */}
                     <CenteredRow>
                         <ArticleTextContainer>
                             <Heading>
