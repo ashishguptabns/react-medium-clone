@@ -36,7 +36,7 @@ export const Header = () => {
     return (
         <Container>
             <LeftContainer>
-                <HomeIcon href='/' />
+                <HomeIcon href='/' aria-label="Home" />
                 {showSearchBox && <SearchBox>
                     {/* <SearchIcon /> */}
                     <SearchInput placeholder='Search' />
@@ -50,7 +50,7 @@ export const Header = () => {
                 <NotificationImportantOutlinedIcon />
             </NotifIcon> */}
             {showPublishBtn && <PublishButton onClick={handlePublish}>Publish</PublishButton>}
-            <a href="https://www.linkedin.com/in/ashishguptabns/" target="_blank" rel="noopener noreferrer">
+            <a aria-label="Profile" href="https://www.linkedin.com/in/ashishguptabns/" target="_blank" rel="noopener noreferrer">
                 <ProfileImg
                     alt='Profile Image'
                     loading="lazy"
