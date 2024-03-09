@@ -4,14 +4,13 @@ import { useEffect } from 'react';
 import { fetchUserDetailsUseCase } from '../../lib/data-service';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { publishArticle } from '../../global-slice';
+import { SearchDropdown } from './search-dropdown';
 
 export const Header = () => {
     const dispatch = useDispatch()
     const [user, setUser] = useState({})
     const [showWriteBox, setShowWriteBox] = useState(false)
     const [showSearchBox, setShowSearchBox] = useState(false)
-    const [showPublishBtn, setShowPublishBtn] = useState(false)
 
     const articleId = useSelector(state => state.global.articleId)
 
@@ -23,22 +22,27 @@ export const Header = () => {
         const isEditing = window.location.pathname.includes('story')
         setShowWriteBox(!isEditing && process.env.NODE_ENV === "development")
         setShowSearchBox(!isEditing)
-        // setShowPublishBtn(articleId && process.env.NODE_ENV === "development")
     }
-    const handlePublish = () => {
-        dispatch(publishArticle())
-    }
+
     useEffect(() => {
         fetchUserDetails()
         handleHeaderItems()
     }, [articleId])
 
+    const [showSearchDropDown, setShowSearchDropDown] = useState(false);
+
+    const toggleDropdown = () => {
+        setTimeout(() => {
+            setShowSearchDropDown(!showSearchDropDown)
+        }, 100);
+    };
+
     return (
         <Container>
+            <SearchDropdown isOpen={showSearchDropDown} />
             <LeftContainer>
                 <HomeIcon href='/' aria-label="Home" />
-                {showSearchBox && <SearchBox>
-                    {/* <SearchIcon /> */}
+                {showSearchBox && <SearchBox onFocus={toggleDropdown} onBlur={toggleDropdown}>
                     <SearchInput placeholder='Search' />
                 </SearchBox>}
             </LeftContainer>
@@ -46,10 +50,6 @@ export const Header = () => {
                 <EditNoteOutlinedIcon />
                 <EditCTA>Write</EditCTA>
             </WriteBox>}
-            {/* <NotifIcon href='/notif'>
-                <NotificationImportantOutlinedIcon />
-            </NotifIcon> */}
-            {showPublishBtn && <PublishButton onClick={handlePublish}>Publish</PublishButton>}
             <a aria-label="Profile" href="https://www.linkedin.com/in/ashishguptabns/" target="_blank" rel="noopener noreferrer">
                 <ProfileImg
                     alt='Profile Image'
