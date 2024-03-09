@@ -13,6 +13,9 @@ const Container = styled.div`
     z-index: 1;
     padding: 10px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    @media (max-width: 768px) {
+        width: 140px;
+    }
 `
 const Item = styled.div`
     font-size: 16px;
