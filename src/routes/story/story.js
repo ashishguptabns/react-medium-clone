@@ -62,11 +62,9 @@ export default function Story() {
     }
     const handleChangedBlock = (blockData) => {
         editorChangesRef.current[blockData.id] = { operation: 'add', block: blockData }
-        // postBlockUseCase(blockData)
     }
     const handleAddedBlock = (blockData) => {
         editorChangesRef.current[blockData.id] = { operation: 'add', block: blockData }
-        // postBlockUseCase(blockData)
     }
     const handleMovedBlock = () => {
         editorRef.current.save()
@@ -83,7 +81,6 @@ export default function Story() {
     }
     const handleDeletedBlock = (blockData) => {
         editorChangesRef.current[blockData.id] = { operation: 'delete', block: blockData }
-        // deleteBlockUseCase(blockData)
     }
     const saveEditorChanges = () => {
         console.log(editorChangesRef.current)
@@ -126,8 +123,6 @@ export default function Story() {
             case 'block-moved':
                 break
         }
-        // handleMovedBlock()
-
         clearTimeout(saveEditorTimerRef.current)
         saveEditorTimerRef.current = setTimeout(() => {
             saveEditorChanges()
@@ -184,7 +179,6 @@ export default function Story() {
                 }
             }, 100);
         }
-
     }, [])
 
     const [tags, setTags] = useState([])
