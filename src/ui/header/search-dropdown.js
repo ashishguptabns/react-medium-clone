@@ -20,6 +20,7 @@ const Container = styled.div`
 const Item = styled.div`
     font-size: 16px;
     padding: 10px 14px;
+    width: 100%;
     cursor: pointer;
 `
 export const SearchDropdown = ({ isOpen }) => {
