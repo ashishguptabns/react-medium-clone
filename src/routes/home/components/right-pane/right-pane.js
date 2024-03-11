@@ -15,7 +15,7 @@ export const HomeRightPane = () => {
     const [problem, setProblem] = useState()
 
     useEffect(() => {
-        const randomNum = Math.random() * problems.length
+        const randomNum = Math.random() * (problems.length - 1)
         setProblem(problems[Math.floor(randomNum)])
     }, [])
 
