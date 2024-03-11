@@ -15,17 +15,22 @@ export const RefreshButton = styled.div`
     height: fit-content;
     align-self: center;
 `
-const ProblemContainer=styled.div`
+const ProblemContainer = styled.div`
     display: flex;
 `
 const Container = styled.div`
-    padding: 40px;
-    line-height: 1.3;
-    white-space: pre-wrap;
+    position: relative;
     width: 40%;
     @media (max-width: 700px){
         display: none;
     }
+`
+const StickyContainer = styled.div`
+    padding: 40px;
+    line-height: 1.3;
+    white-space: pre-wrap;
+    position: sticky;
+    top: 0;
 `
 export const HomeRightPane = () => {
     const [problem, setProblem] = useState()
@@ -40,11 +45,13 @@ export const HomeRightPane = () => {
         setRefresh(!refresh)
     }
 
-return <Container>
-        <ProblemContainer>
-            <h2>Solve this Problem</h2>
-            <RefreshButton onClick={handleRefresh}>Refresh</RefreshButton>
-        </ProblemContainer>
-        {problem}
+    return <Container>
+        <StickyContainer>
+            <ProblemContainer>
+                <h2>Solve this Problem</h2>
+                <RefreshButton onClick={handleRefresh}>Refresh</RefreshButton>
+            </ProblemContainer>
+            {problem}
+        </StickyContainer>
     </Container>
 }
