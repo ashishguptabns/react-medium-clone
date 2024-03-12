@@ -6,6 +6,7 @@ import { fetchTabsUseCase } from "../../../../lib/data-service"
 import { blankTabs } from "../../../../lib/mock-data"
 import { useDispatch } from "react-redux"
 import { setTab } from "../../home-slice"
+import { useLocation } from 'react-router-dom';
 
 const Container = styled.div`
     position: sticky;
@@ -21,6 +22,7 @@ const Container = styled.div`
 export const Tabs = () => {
     const [tabs, setTabs] = useState([])
     const dispatch = useDispatch()
+    const location = useLocation();
 
     const fetchTabs = () => {
         setTabs(blankTabs)
@@ -35,6 +37,8 @@ export const Tabs = () => {
     }
     useEffect(() => {
         handleURLTag()
+    }, [location])
+    useEffect(() => {
         fetchTabs()
     }, [])
 

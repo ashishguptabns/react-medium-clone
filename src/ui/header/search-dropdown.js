@@ -1,6 +1,5 @@
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components'
-import { setTab } from '../../routes/home/home-slice';
+import { Link } from 'react-router-dom'
 
 const Container = styled.div`
     position: absolute;
@@ -21,21 +20,29 @@ const Item = styled.div`
     font-size: 16px;
     padding: 10px 14px;
     width: 100%;
+`
+export const StyledLink = styled(Link)`
     cursor: pointer;
+    width: 100%;
+    text-decoration: none;
+    color: black;
 `
 export const SearchDropdown = ({ isOpen }) => {
-    const dispatch = useDispatch()
-    const handleClick = (event) => {
-        dispatch(setTab(event.target.innerText))
-        isOpen = false
-    }
     return (
         <>
             {isOpen && <Container>
-                <Item onClick={handleClick}>React</Item>
-                <Item onClick={handleClick}>Javascript</Item>
-                <Item onClick={handleClick}>System Design</Item>
-                <Item onClick={handleClick}>Node</Item>
+                <StyledLink to={'/?tag=React'}>
+                    <Item>React</Item>
+                </StyledLink>
+                <StyledLink to={'/?tag=Javascript'}>
+                    <Item>Javascript</Item>
+                </StyledLink>
+                <StyledLink to={'/?tag=System Design'}>
+                    <Item>System Design</Item>
+                </StyledLink>
+                <StyledLink to={'/?tag=Node'}>
+                    <Item>Node</Item>
+                </StyledLink>
             </Container>}
         </>
     )
