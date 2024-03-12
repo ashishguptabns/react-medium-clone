@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import problems from '../../../../lib/dsa-problems'
 import styled from "styled-components";
 
@@ -32,17 +32,53 @@ const StickyContainer = styled.div`
     position: sticky;
     top: 0;
 `
+const Timer = styled.div`
+    display: flex;
+    align-items: center;
+`
+const TimerCTA = styled.p`
+    border: 1px solid gray;
+    padding: 4px;
+    border-radius: 4px;
+    width: fit-content;
+    cursor: pointer;
+    background: ${props => props.$time > 0 ? '#f47979' : '#e3dfdf'};
+`
+const Time = styled.p`
+    font-size: 16px;
+    margin-left: 20px;
+`
 export const HomeRightPane = () => {
     const [problem, setProblem] = useState()
     const [refresh, setRefresh] = useState()
+    const [secondsSpent, setSecondsSpent] = useState(0)
+    const timerRef = useRef(null)
 
     useEffect(() => {
         const randomNum = Math.random() * (problems.length - 1)
         setProblem(problems[Math.floor(randomNum)])
+
+        return () => {
+            stopTimer()
+        }
     }, [refresh])
 
     const handleRefresh = () => {
         setRefresh(!refresh)
+    }
+    const stopTimer = () => {
+        clearInterval(timerRef.current)
+    }
+    const handleTimer = () => {
+        if (secondsSpent > 0) {
+            setSecondsSpent(0)
+            stopTimer()
+        } else {
+            setSecondsSpent(prev => prev + 1)
+            timerRef.current = setInterval(() => {
+                setSecondsSpent(prev => prev + 1)
+            }, 1000);
+        }
     }
 
     return <Container>
@@ -52,6 +88,14 @@ export const HomeRightPane = () => {
                 <RefreshButton onClick={handleRefresh}>Next</RefreshButton>
             </ProblemContainer>
             {problem}
+            <Timer>
+                <TimerCTA $time={secondsSpent} onClick={handleTimer}>
+                    {secondsSpent === 0 ? 'Start timer' : 'Stop timer'}
+                </TimerCTA>
+                <Time>
+                    {`${Math.floor(secondsSpent / 60)} m : ${secondsSpent % 60} s`}
+                </Time>
+            </Timer>
         </StickyContainer>
     </Container>
 }
