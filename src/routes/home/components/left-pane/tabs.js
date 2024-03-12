@@ -4,6 +4,8 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { fetchTabsUseCase } from "../../../../lib/data-service"
 import { blankTabs } from "../../../../lib/mock-data"
+import { useDispatch } from "react-redux"
+import { setTab } from "../../home-slice"
 
 const Container = styled.div`
     position: sticky;
@@ -18,12 +20,21 @@ const Container = styled.div`
 
 export const Tabs = () => {
     const [tabs, setTabs] = useState([])
+    const dispatch = useDispatch()
 
     const fetchTabs = () => {
         setTabs(blankTabs)
         fetchTabsUseCase().then(data => setTabs(data))
     }
+    const handleURLTag = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tag = urlParams.get('tag');
+        if (tag) {
+            dispatch(setTab(tag))
+        }
+    }
     useEffect(() => {
+        handleURLTag()
         fetchTabs()
     }, [])
 

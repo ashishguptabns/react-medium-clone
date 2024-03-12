@@ -43,7 +43,7 @@ export const Article = ({ article }) => {
     return (
         <>
             {!title && <PlaceholderArticle />}
-            {title && <HrefContainer aria-label={title} href={`/story/${article.id}`}>
+            {title && <HrefContainer aria-label={title} to={`/story/${article.id}`}>
                 <Container>
                     {/* <CenteredRow>
                         <ProfileImg src={article.usrImgUrl} alt={`profile-img${title}`} />

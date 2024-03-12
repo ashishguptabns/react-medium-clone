@@ -41,12 +41,12 @@ export const Header = () => {
         <Container>
             <SearchDropdown isOpen={showSearchDropDown} />
             <LeftContainer>
-                <HomeIcon href='/' aria-label="Home" />
+                <HomeIcon to='/' aria-label="Home" />
                 {showSearchBox && <SearchBox onFocus={toggleDropdown} onBlur={toggleDropdown}>
                     <SearchInput placeholder='Search' />
                 </SearchBox>}
             </LeftContainer>
-            {showWriteBox && <WriteBox href='/story/'>
+            {showWriteBox && <WriteBox aria-label="new-story" to={`/story`}>
                 <EditNoteOutlinedIcon />
                 <EditCTA>Write</EditCTA>
             </WriteBox>}

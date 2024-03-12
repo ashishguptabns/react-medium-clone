@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useSelector, useDispatch } from 'react-redux'
 import { setTab } from "../../home-slice"
 import { ShimmerDiv } from "../../../../ui/loading/shimmer-div"
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     min-width: max-content;
@@ -11,7 +12,11 @@ const Container = styled.div`
     cursor: pointer;
     color: ${props => props.$isSelected ? '#242424' : 'gray'};
     font-size: 14px;
+    text-decoration: none;
 `
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
 
 const PlaceholderTab = () => {
     return (
@@ -29,7 +34,13 @@ export const Tab = ({ title }) => {
     return (
         <>
             {!title && <PlaceholderTab />}
-            {title && <Container onClick={handleTabClick} $isSelected={currTab === title}>{title}</Container>}
+            {
+                title && <StyledLink aria-label={title} to={`/?tag=${title}`}>
+                    <Container onClick={handleTabClick} $isSelected={currTab === title}>
+                        {title}
+                    </Container>
+                </StyledLink>
+            }
         </>
     )
 }

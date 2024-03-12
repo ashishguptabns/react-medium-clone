@@ -26,8 +26,8 @@ function App() {
 
   return (
     <>
-      <Header />
       <Router>
+        <Header />
         <Suspense fallback={<PlaceholderPage />}>
           <Routes>
             <Route path="/" element={<Home />} />

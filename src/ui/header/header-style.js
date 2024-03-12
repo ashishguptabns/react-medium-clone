@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
         align-items: center;
@@ -12,7 +13,7 @@ export const LeftContainer = styled.div`
         align-items: center;
         flex: 1 0 auto
     `
-export const HomeIcon = styled.a`
+export const HomeIcon = styled(Link)`
         cursor: pointer;
         display: inline-block;
         width: 40px; 
@@ -53,7 +54,7 @@ export const SearchInput = styled.input`
         border: none;
         line-height: 20px;
     `
-export const WriteBox = styled.a`
+export const WriteBox = styled(Link)`
     cursor: pointer;
     display: flex;
     align-items: center;
