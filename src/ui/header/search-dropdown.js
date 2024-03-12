@@ -26,8 +26,8 @@ const Item = styled.div`
 export const SearchDropdown = ({ isOpen }) => {
     const dispatch = useDispatch()
     const handleClick = (event) => {
-        isOpen = false
         dispatch(setTab(event.target.innerText))
+        isOpen = false
     }
     return (
         <>

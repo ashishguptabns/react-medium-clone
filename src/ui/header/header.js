@@ -19,13 +19,15 @@ export const Header = () => {
     }
 
     const handleHeaderItems = () => {
-        const isEditing = window.location.pathname.includes('story')
-        setShowWriteBox(!isEditing && process.env.NODE_ENV === "development")
+        const isStoryPage = window.location.pathname.includes('story')
+        const isEditing = isStoryPage && process.env.NODE_ENV === "development"
+        setShowWriteBox(!isEditing)
         setShowSearchBox(!isEditing)
     }
-
     useEffect(() => {
         fetchUserDetails()
+    }, [])
+    useEffect(() => {
         handleHeaderItems()
     }, [articleId])
 

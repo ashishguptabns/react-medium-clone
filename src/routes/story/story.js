@@ -152,6 +152,10 @@ export default function Story() {
     const [title, setTitle] = useState('Share your knowledge')
     useEffect(() => {
         document.title = title;
+
+        return () => {
+            dispatch(setArticleId(undefined))
+        }
     }, [title])
 
     const handleEditorData = (article) => {
