@@ -21,8 +21,8 @@ export const Header = () => {
     const handleHeaderItems = () => {
         const isStoryPage = window.location.pathname.includes('story')
         const isEditing = isStoryPage && process.env.NODE_ENV === "development"
-        setShowWriteBox(!isEditing)
-        setShowSearchBox(!isEditing)
+        setShowWriteBox(!isStoryPage && process.env.NODE_ENV === "development")
+        setShowSearchBox(!isStoryPage)
     }
     useEffect(() => {
         fetchUserDetails()
@@ -36,7 +36,7 @@ export const Header = () => {
     const toggleDropdown = () => {
         setTimeout(() => {
             setShowSearchDropDown(!showSearchDropDown)
-        }, 100);
+        }, 200);
     };
 
     return (
