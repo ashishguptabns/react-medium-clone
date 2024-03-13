@@ -53,6 +53,7 @@ export const HomeRightPane = () => {
     const [refresh, setRefresh] = useState()
     const [secondsSpent, setSecondsSpent] = useState(0)
     const timerRef = useRef(null)
+    const startTimeRef = useRef()
 
     useEffect(() => {
         const randomNum = Math.random() * (problems.length - 1)
@@ -74,9 +75,11 @@ export const HomeRightPane = () => {
             setSecondsSpent(0)
             stopTimer()
         } else {
-            setSecondsSpent(prev => prev + 1)
+            startTimeRef.current = Date.now()
             timerRef.current = setInterval(() => {
-                setSecondsSpent(prev => prev + 1)
+                const currTime = Date.now()
+                const diff = currTime - startTimeRef.current
+                setSecondsSpent(Math.floor(diff / 1000))
             }, 1000);
         }
     }
