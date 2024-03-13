@@ -13,7 +13,7 @@ const Container = styled.div`
     top: 0;
     display: flex;
     background: white;
-    overflow: auto;
+    overflow-x: scroll;
     box-shadow: inset 0 -1px 0 #F2F2F2;
     scrollbar-width: none;
     margin: 0 24px;
