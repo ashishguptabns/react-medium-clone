@@ -37,11 +37,12 @@ const Timer = styled.div`
     align-items: center;
 `
 const TimerCTA = styled.p`
-    border: 1px solid gray;
-    padding: 4px;
+    border: 1px solid #dcd6d6;
+    padding: 4px 8px;
     border-radius: 4px;
     width: fit-content;
     cursor: pointer;
+    x-shadow: inset 0 -1px 0 #cfc0c0;
     background: ${props => props.$time > 0 ? '#f47979' : '#e3dfdf'};
 `
 const Time = styled.p`
