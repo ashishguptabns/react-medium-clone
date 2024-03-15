@@ -57,7 +57,7 @@ export const HomeRightPane = () => {
     const startTimeRef = useRef()
 
     useEffect(() => {
-        const randomNum = Math.random() * (problems.length - 1)
+        const randomNum = Math.random() * problems.length
         setProblem(problems[Math.floor(randomNum)])
 
         return () => {
