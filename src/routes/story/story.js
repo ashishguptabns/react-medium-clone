@@ -56,7 +56,7 @@ export default function Story() {
     const handleArticleCreation = async () => {
         if (!articleId) {
             articleId = (await postArticleUseCase()).id
-            window.history.replaceState({}, '', `${articleId}`);
+            window.history.replaceState({}, '', `story/${articleId}`);
             dispatch(setArticleId(articleId))
         }
     }
