@@ -92,7 +92,7 @@ export const HomeRightPane = () => {
         <StickyContainer>
             <ProblemContainer>
                 <h2>Solve this Problem</h2>
-                <RefreshButton onClick={handleRefresh}>Next</RefreshButton>
+                <RefreshButton onClick={handleRefresh}>Shuffle</RefreshButton>
             </ProblemContainer>
             {problem}
             <Timer>
