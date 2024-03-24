@@ -111,7 +111,7 @@ export const HomeRightPane = () => {
         }
     }
     const handleDone = () => {
-        localStorage.setItem(problem.substring(0, 20), true);
+        localStorage.setItem(problem.substring(0, 20), Date.now());
         handleRefresh()
     }
 
