@@ -73,7 +73,7 @@ export const HomeRightPane = () => {
         let problem
         let repeatCount = 0
         while (repeatCount < 200) {
-            let randomNum = Math.floor(Math.random() * (problems.length + 10))
+            let randomNum = Math.floor(Math.random() * (problems.length + 2))
             if (randomNum > problems.length) {
                 randomNum = problems.length - 1
             }
