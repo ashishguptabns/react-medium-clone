@@ -15,6 +15,19 @@ export const RefreshButton = styled.div`
     height: fit-content;
     align-self: center;
 `
+export const DoneButton = styled.div`
+    width: 70px;
+    background: #dfd7d7;
+    color: black;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 6px;
+    margin-left: 10px;
+    cursor: pointer;
+    text-align: center;
+    height: fit-content;
+    align-self: center;
+`
 const ProblemContainer = styled.div`
     display: flex;
 `
@@ -57,11 +70,21 @@ export const HomeRightPane = () => {
     const startTimeRef = useRef()
 
     useEffect(() => {
-        let randomNum = Math.floor(Math.random() * (problems.length + 10))
-        if (randomNum > problems.length) {
-            randomNum = problems.length - 1
+        let problem
+        let repeatCount = 0
+        while (repeatCount < 200) {
+            let randomNum = Math.floor(Math.random() * (problems.length + 10))
+            if (randomNum > problems.length) {
+                randomNum = problems.length - 1
+            }
+            problem = problems[randomNum]
+            if (problem && !localStorage.getItem(problem.substring(0, 20))) {
+                repeatCount && console.log(`Crossed ${repeatCount} problems`)
+                break
+            }
+            repeatCount++
         }
-        setProblem(problems[randomNum])
+        setProblem(problem)
 
         return () => {
             stopTimer()
@@ -87,12 +110,17 @@ export const HomeRightPane = () => {
             }, 1000);
         }
     }
+    const handleDone = () => {
+        localStorage.setItem(problem.substring(0, 20), true);
+        handleRefresh()
+    }
 
     return <Container>
         <StickyContainer>
             <ProblemContainer>
                 <h2>Solve this Problem</h2>
                 <RefreshButton onClick={handleRefresh}>Shuffle</RefreshButton>
+                <DoneButton onClick={handleDone}>Done</DoneButton>
             </ProblemContainer>
             {problem}
             <Timer>
