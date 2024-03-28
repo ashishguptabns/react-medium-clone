@@ -78,7 +78,11 @@ export const HomeRightPane = () => {
                 randomNum = problems.length - 1
             }
             problem = problems[randomNum]
-            if (problem && !localStorage.getItem(problem.substring(0, 20))) {
+            const diff = Date.now() - localStorage.getItem(problem.substring(0, 20))
+            let days = Math.ceil(diff / 1000 / 60 / 60 / 24)
+            days = days || 7
+            if (days > 7) {
+                console.log(days, localStorage.getItem(problem.substring(0, 20)))
                 repeatCount && console.log(`Crossed ${repeatCount} problems`)
                 break
             }
