@@ -74,20 +74,24 @@ export const HomeRightPane = () => {
         let repeatCount = 0
         while (repeatCount < 200) {
             let randomNum = Math.floor(Math.random() * (problems.length + 2))
-            if (randomNum > problems.length) {
-                randomNum = problems.length - 1
-            }
+            randomNum = Math.min(problems.length - 1, randomNum)
+
             problem = problems[randomNum]
-            const diff = Date.now() - localStorage.getItem(problem.substring(0, 20))
-            let days = Math.ceil(diff / 1000 / 60 / 60 / 24)
-            days = days || 7
-            if (days > 7) {
-                console.log(days, localStorage.getItem(problem.substring(0, 20)))
-                repeatCount && console.log(`Crossed ${repeatCount} problems`)
-                break
+            if (problem) {
+                const lastDateTS = parseInt(localStorage.getItem(problem.substring(0, 20)), 10)
+                const diff = Date.now() - lastDateTS
+                let days = Math.ceil(diff / 1000 / 60 / 60 / 24)
+                days = days || 7
+                if (days >= 7) {
+                    console.log(days, lastDateTS, localStorage.getItem(problem.substring(0, 20)))
+                    break
+                }
+                repeatCount++
+            } else {
+                console.error(problem, randomNum)
             }
-            repeatCount++
         }
+        repeatCount && console.log(`Crossed ${repeatCount} problems`)
         setProblem(problem)
 
         return () => {
