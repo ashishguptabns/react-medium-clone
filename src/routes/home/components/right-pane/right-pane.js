@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
 import styled from "styled-components";
 import { useProblem } from './use-problem';
+import { useTimer } from './use-timer';
 
 export const RefreshButton = styled.div`
     width: 70px;
@@ -63,39 +63,8 @@ const Time = styled.p`
     margin-left: 20px;
 `
 export const HomeRightPane = () => {
-    const [secondsSpent, setSecondsSpent] = useState(0)
-    const timerRef = useRef(null)
-    const startTimeRef = useRef()
-    const [problem, setRefresh, refresh] = useProblem()
-
-    const handleRefresh = () => {
-        setRefresh(!refresh)
-    }
-    useEffect(() => {
-        return () => {
-            stopTimer()
-        }
-    })
-    const stopTimer = () => {
-        clearInterval(timerRef.current)
-    }
-    const handleTimer = () => {
-        if (secondsSpent > 0) {
-            setSecondsSpent(0)
-            stopTimer()
-        } else {
-            startTimeRef.current = Date.now()
-            timerRef.current = setInterval(() => {
-                const currTime = Date.now()
-                const diff = currTime - startTimeRef.current
-                setSecondsSpent(Math.floor(diff / 1000))
-            }, 1000);
-        }
-    }
-    const handleDone = () => {
-        localStorage.setItem(problem.substring(0, 20), Date.now());
-        handleRefresh()
-    }
+    const [problem, handleRefresh, handleDone] = useProblem()
+    const [secondsSpent, handleTimer] = useTimer()
 
     return <Container>
         <StickyContainer>

@@ -5,6 +5,14 @@ export const useProblem = () => {
     const [problem, setProblem] = useState()
     const [refresh, setRefresh] = useState()
 
+    const handleDone = () => {
+        localStorage.setItem(problem.substring(0, 20), Date.now());
+        handleRefresh()
+    }
+    const handleRefresh = () => {
+        setRefresh(!refresh)
+    }
+
     useEffect(() => {
         let problem
         let repeatCount = 0
@@ -31,5 +39,5 @@ export const useProblem = () => {
         setProblem(problem)
     }, [refresh])
 
-    return [problem, setRefresh, refresh]
+    return [problem, handleRefresh, handleDone]
 }
