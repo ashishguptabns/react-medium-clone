@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import problems from '../../../../lib/dsa-problems'
 import styled from "styled-components";
+import { useProblem } from './use-problem';
 
 export const RefreshButton = styled.div`
     width: 70px;
@@ -63,45 +63,19 @@ const Time = styled.p`
     margin-left: 20px;
 `
 export const HomeRightPane = () => {
-    const [problem, setProblem] = useState()
-    const [refresh, setRefresh] = useState()
     const [secondsSpent, setSecondsSpent] = useState(0)
     const timerRef = useRef(null)
     const startTimeRef = useRef()
-
-    useEffect(() => {
-        let problem
-        let repeatCount = 0
-        while (repeatCount < 200) {
-            let randomNum = Math.floor(Math.random() * (problems.length + 2))
-            randomNum = Math.min(problems.length - 1, randomNum)
-
-            problem = problems[randomNum]
-            if (problem) {
-                const lastDateTS = parseInt(localStorage.getItem(problem.substring(0, 20)), 10)
-                const diff = Date.now() - lastDateTS
-                let days = Math.ceil(diff / 1000 / 60 / 60 / 24)
-                days = days || 7
-                if (days >= 7) {
-                    console.log(days, lastDateTS, localStorage.getItem(problem.substring(0, 20)))
-                    break
-                }
-                repeatCount++
-            } else {
-                console.error(problem, randomNum)
-            }
-        }
-        repeatCount && console.log(`Crossed ${repeatCount} problems`)
-        setProblem(problem)
-
-        return () => {
-            stopTimer()
-        }
-    }, [refresh])
+    const [problem, setRefresh, refresh] = useProblem()
 
     const handleRefresh = () => {
         setRefresh(!refresh)
     }
+    useEffect(() => {
+        return () => {
+            stopTimer()
+        }
+    })
     const stopTimer = () => {
         clearInterval(timerRef.current)
     }
