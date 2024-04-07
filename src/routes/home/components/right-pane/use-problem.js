@@ -27,7 +27,7 @@ export const useProblem = () => {
                 let days = Math.ceil(diff / 1000 / 60 / 60 / 24)
                 days = days || 10
                 if (days >= 10) {
-                    console.log(days, lastDateTS, localStorage.getItem(problem.substring(0, 20)))
+                    console.log(days + ' days', 'ts: ' + localStorage.getItem(problem.substring(0, 20)))
                     break
                 }
                 repeatCount++
