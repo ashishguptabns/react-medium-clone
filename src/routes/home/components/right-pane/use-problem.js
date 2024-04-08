@@ -25,8 +25,8 @@ export const useProblem = () => {
                 const lastDateTS = parseInt(localStorage.getItem(problem.substring(0, 20)), 10)
                 const diff = Date.now() - lastDateTS
                 let days = Math.ceil(diff / 1000 / 60 / 60 / 24)
-                days = days || 10
-                if (days >= 10) {
+                days = days || 20
+                if (days >= 20) {
                     console.log(days + ' days', 'ts: ' + localStorage.getItem(problem.substring(0, 20)))
                     break
                 }
