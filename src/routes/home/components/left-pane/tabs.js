@@ -31,9 +31,7 @@ export const Tabs = () => {
     const handleURLTag = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const tag = (urlParams.get('tag') || 'React');
-        if (tag) {
-            dispatch(setTab(tag))
-        }
+        dispatch(setTab(tag))
     }
     useEffect(() => {
         handleURLTag()

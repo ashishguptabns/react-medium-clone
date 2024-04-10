@@ -7,7 +7,7 @@ export const homeSlice = createSlice({
     },
     reducers: {
         setTab: (state, action) => {
-            state.currTab = action.payload
+            state.currTab = action.payload || state.currTab
         },
     },
 })
