@@ -40,6 +40,9 @@ const Editor = styled.div`
 `
 
 export default function Story() {
+
+    const editsFrozenRef = useRef()
+
     const dispatch = useDispatch()
 
     const editorRef = useRef()
@@ -99,7 +102,7 @@ export default function Story() {
     }
     const saveEditorTimerRef = useRef()
     const handleEvent = async (api, event) => {
-        if (editorRef.current.configuration.readOnly) {
+        if (editsFrozenRef.current || editorRef.current.configuration.readOnly) {
             return
         }
         const blockId = event.detail.target.id
@@ -169,7 +172,23 @@ export default function Story() {
                 }
             }
             editorRef.current.render(editorDataRef.current)
+            changeTextAreaH()
         }
+    }
+    const freezeEdits = () => {
+        editsFrozenRef.current = true
+        setTimeout(() => {
+            editsFrozenRef.current = false
+        }, 2000);
+    }
+    const changeTextAreaH = () => {
+        setTimeout(() => {
+            freezeEdits()
+            const textareas = document.querySelectorAll('textarea');
+            for (const textarea of textareas) {
+                textarea.style.height = (textarea.scrollHeight) + "px";
+            }
+        }, 500);
     }
     useEffect(() => {
         if (!editorRef.current) {
