@@ -189,6 +189,7 @@ export default function Story() {
                 textarea.style.height = (textarea.scrollHeight) + "px";
                 textarea.style.color = 'black'
                 textarea.style.background = 'white'
+                textarea.style.overflow = 'hidden'
             }
         }, 500);
     }
