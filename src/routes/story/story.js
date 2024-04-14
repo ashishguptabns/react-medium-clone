@@ -187,6 +187,8 @@ export default function Story() {
             const textareas = document.querySelectorAll('textarea');
             for (const textarea of textareas) {
                 textarea.style.height = (textarea.scrollHeight) + "px";
+                textarea.style.color = 'black'
+                textarea.style.background = 'white'
             }
         }, 500);
     }
