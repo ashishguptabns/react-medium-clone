@@ -6,8 +6,8 @@ export const useProblem = () => {
     const [refresh, setRefresh] = useState()
 
     const toggleProblemType = () => {
-        const giveOldProblem = localStorage.getItem('give_old_problem')
-        localStorage.setItem('give_old_problem', !giveOldProblem)
+        const giveOldProblem = localStorage.getItem('give_old_problem') || 'no'
+        localStorage.setItem('give_old_problem', giveOldProblem === 'no' ? 'yes' : 'no')
     }
     const handleDone = () => {
         localStorage.setItem(problem.substring(0, 20), Date.now());
@@ -19,7 +19,7 @@ export const useProblem = () => {
         setRefresh(!refresh)
     }
     const showNewProblem = () => {
-        return !localStorage.getItem('give_old_problem')
+        return localStorage.getItem('give_old_problem') === 'no'
     }
     useEffect(() => {
         let problem
