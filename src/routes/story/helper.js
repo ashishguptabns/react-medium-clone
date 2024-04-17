@@ -5,8 +5,26 @@ import Table from '@editorjs/table'
 import Delimiter from '@editorjs/delimiter';
 import Checklist from '@editorjs/checklist'
 import Paragraph from '@editorjs/paragraph';
+import ImageTool from '@editorjs/image';
+import { uploadFile } from '../../lib/data-service';
 
 export const editorTools = {
+    image: {
+        class: ImageTool,
+        config: {
+            uploader: {
+                async uploadByFile(file) {
+                    const url = await uploadFile(file);
+                    return {
+                        success: 1,
+                        file: {
+                            url: url,
+                        }
+                    };
+                },
+            }
+        }
+    },
     paragraph: {
         class: Paragraph,
         inlineToolbar: true,
@@ -37,6 +55,7 @@ export const editorTools = {
         class: Checklist,
         inlineToolbar: true,
     },
+
 }
 
 export const startData = {

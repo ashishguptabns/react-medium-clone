@@ -32,6 +32,11 @@ export const fetchArticlesUseCase = async (tag) => {
     return data
 }
 
+export const uploadFile = async (file) => {
+    console.log(file)
+    return 'https://codex.so/upload/redactor_images/o_80beea670e49f04931ce9e3b2122ac70.jpg'
+}
+
 export const fetchArticleUseCase = async (id) => {
     let data
     try {
