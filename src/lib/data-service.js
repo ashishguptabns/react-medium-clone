@@ -26,7 +26,7 @@ export const fetchArticlesUseCase = async (tag) => {
         const networkHost = NETWORK.HOST;
         const url = networkHost.replace('operationId', 'articles');
         const res = await fetch(url + `?tag=${tag}`);
-        data = (await res.json());
+        data = await res.json()
     } catch (error) {
         console.error('fetchArticlesUseCase', error);
     }
@@ -35,19 +35,21 @@ export const fetchArticlesUseCase = async (tag) => {
 
 export const uploadFile = async (file) => {
     const articleId = (window.location.href).split('/').at(-1)
-    console.log(file, articleId)
     const formData = new FormData();
     formData.append("file", file);
     try {
         const networkHost = NETWORK.HOST;
         const url = networkHost.replace('operationId', 'image');
-        fetch(`${url}/${articleId}`, {
+        const res = await fetch(`${url}/${articleId}`, {
             method: 'POST',
-            body: formData
-        }).then(url => {
-            console.log(url)
-            return url
-        });
+            body: formData,
+        })
+        if (!res.ok) {
+            throw new Error(`Failed to upload file: ${res.statusText}`);
+        }
+        const data = await res.json()
+        console.log('uploadFile', data)
+        return data.url
     } catch (error) {
         console.error('postBlockUseCase', error);
     }
