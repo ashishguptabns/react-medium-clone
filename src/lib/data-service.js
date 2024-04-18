@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { NETWORK } from "./constants";
 import { currUser, tabs } from "./mock-data"
 
@@ -33,8 +34,24 @@ export const fetchArticlesUseCase = async (tag) => {
 }
 
 export const uploadFile = async (file) => {
-    console.log(file)
-    return 'https://codex.so/upload/redactor_images/o_80beea670e49f04931ce9e3b2122ac70.jpg'
+    const articleId = (window.location.href).split('/').at(-1)
+    console.log(file, articleId)
+    const formData = new FormData();
+    formData.append("file", file);
+    try {
+        const networkHost = NETWORK.HOST;
+        const url = networkHost.replace('operationId', 'image');
+        fetch(`${url}/${articleId}`, {
+            method: 'POST',
+            body: formData
+        }).then(url => {
+            console.log(url)
+            return url
+        });
+    } catch (error) {
+        console.error('postBlockUseCase', error);
+    }
+    return ''
 }
 
 export const fetchArticleUseCase = async (id) => {
