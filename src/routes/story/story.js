@@ -187,8 +187,10 @@ export default function Story() {
             const textareas = document.querySelectorAll('textarea');
             for (const textarea of textareas) {
                 textarea.style.height = (textarea.scrollHeight) + "px";
-                textarea.style.color = 'black'
+                textarea.style.color = '#0042ff'
                 textarea.style.background = 'white'
+                textarea.style.overflowY = 'hidden';
+                textarea.style.scrollbarWidth = 'none';
             }
         }, 500);
     }
