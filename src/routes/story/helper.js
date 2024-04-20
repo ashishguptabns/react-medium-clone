@@ -5,23 +5,32 @@ import Table from '@editorjs/table'
 import Delimiter from '@editorjs/delimiter';
 import Checklist from '@editorjs/checklist'
 import Paragraph from '@editorjs/paragraph';
-import ImageTool from '@editorjs/image';
+import InlineImage from 'editorjs-inline-image';
 
 export const editorTools = {
+    // image: {
+    //     class: ImageTool,
+    //     config: {
+    //         uploader: {
+    //             async uploadByUrl(url) {
+    //                 url = 'https://firebasestorage.googleapis.com/v0/b/app-builder-666.appspot.com/o/images%2Farticles%2Fevents_list.png?alt=media&token=ee89b26f-c394-4559-860c-f0101bf1cbfe'
+    //                 return {
+    //                     success: 1,
+    //                     file: {
+    //                         url: url,
+    //                     }
+    //                 };
+    //             },
+    //         }
+    //     }
+    // },
     image: {
-        class: ImageTool,
+        class: InlineImage,
+        inlineToolbar: true,
         config: {
-            uploader: {
-                async uploadByUrl(url) {
-                    url = 'https://firebasestorage.googleapis.com/v0/b/app-builder-666.appspot.com/o/images%2Farticles%2Fevents_list.png?alt=media&token=ee89b26f-c394-4559-860c-f0101bf1cbfe'
-                    return {
-                        success: 1,
-                        file: {
-                            url: url,
-                        }
-                    };
-                },
-            }
+            embed: {
+                display: true,
+            },
         }
     },
     paragraph: {
