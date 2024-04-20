@@ -6,15 +6,14 @@ import Delimiter from '@editorjs/delimiter';
 import Checklist from '@editorjs/checklist'
 import Paragraph from '@editorjs/paragraph';
 import ImageTool from '@editorjs/image';
-import { uploadFile } from '../../lib/data-service';
 
 export const editorTools = {
     image: {
         class: ImageTool,
         config: {
             uploader: {
-                async uploadByFile(file) {
-                    const url = await uploadFile(file);
+                async uploadByUrl(url) {
+                    url = 'https://firebasestorage.googleapis.com/v0/b/app-builder-666.appspot.com/o/images%2Farticles%2Fevents_list.png?alt=media&token=ee89b26f-c394-4559-860c-f0101bf1cbfe'
                     return {
                         success: 1,
                         file: {

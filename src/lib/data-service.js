@@ -32,29 +32,6 @@ export const fetchArticlesUseCase = async (tag) => {
     return data
 }
 
-export const uploadFile = async (file) => {
-    const articleId = (window.location.href).split('/').at(-1)
-    const formData = new FormData();
-    formData.append("file", file);
-    try {
-        const networkHost = NETWORK.HOST;
-        const url = networkHost.replace('operationId', 'image');
-        const res = await fetch(`${url}/${articleId}`, {
-            method: 'POST',
-            body: formData,
-        })
-        if (!res.ok) {
-            throw new Error(`Failed to upload file: ${res.statusText}`);
-        }
-        const data = await res.json()
-        console.log('uploadFile', data)
-        return data.url
-    } catch (error) {
-        console.error('postBlockUseCase', error);
-    }
-    return ''
-}
-
 export const fetchArticleUseCase = async (id) => {
     let data
     try {
