@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { NETWORK } from "./constants";
 import { currUser, tabs } from "./mock-data"
 
