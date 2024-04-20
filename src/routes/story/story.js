@@ -40,6 +40,9 @@ const Editor = styled.div`
 `
 
 export default function Story() {
+
+    const editsFrozenRef = useRef()
+
     const dispatch = useDispatch()
 
     const editorRef = useRef()
@@ -56,17 +59,15 @@ export default function Story() {
     const handleArticleCreation = async () => {
         if (!articleId) {
             articleId = (await postArticleUseCase()).id
-            window.history.replaceState({}, '', `${articleId}`);
+            window.history.replaceState({}, '', `story/${articleId}`);
             dispatch(setArticleId(articleId))
         }
     }
     const handleChangedBlock = (blockData) => {
         editorChangesRef.current[blockData.id] = { operation: 'add', block: blockData }
-        // postBlockUseCase(blockData)
     }
     const handleAddedBlock = (blockData) => {
         editorChangesRef.current[blockData.id] = { operation: 'add', block: blockData }
-        // postBlockUseCase(blockData)
     }
     const handleMovedBlock = () => {
         editorRef.current.save()
@@ -83,7 +84,6 @@ export default function Story() {
     }
     const handleDeletedBlock = (blockData) => {
         editorChangesRef.current[blockData.id] = { operation: 'delete', block: blockData }
-        // deleteBlockUseCase(blockData)
     }
     const saveEditorChanges = () => {
         console.log(editorChangesRef.current)
@@ -102,7 +102,7 @@ export default function Story() {
     }
     const saveEditorTimerRef = useRef()
     const handleEvent = async (api, event) => {
-        if (editorRef.current.configuration.readOnly) {
+        if (editsFrozenRef.current || editorRef.current.configuration.readOnly) {
             return
         }
         const blockId = event.detail.target.id
@@ -126,8 +126,6 @@ export default function Story() {
             case 'block-moved':
                 break
         }
-        // handleMovedBlock()
-
         clearTimeout(saveEditorTimerRef.current)
         saveEditorTimerRef.current = setTimeout(() => {
             saveEditorChanges()
@@ -157,6 +155,10 @@ export default function Story() {
     const [title, setTitle] = useState('Share your knowledge')
     useEffect(() => {
         document.title = title;
+
+        return () => {
+            dispatch(setArticleId(undefined))
+        }
     }, [title])
 
     const handleEditorData = (article) => {
@@ -170,7 +172,27 @@ export default function Story() {
                 }
             }
             editorRef.current.render(editorDataRef.current)
+            changeTextAreaH()
         }
+    }
+    const freezeEdits = () => {
+        editsFrozenRef.current = true
+        setTimeout(() => {
+            editsFrozenRef.current = false
+        }, 2000);
+    }
+    const changeTextAreaH = () => {
+        setTimeout(() => {
+            freezeEdits()
+            const textareas = document.querySelectorAll('textarea');
+            for (const textarea of textareas) {
+                textarea.style.height = (textarea.scrollHeight) + "px";
+                textarea.style.color = '#0042ff'
+                textarea.style.background = 'white'
+                textarea.style.overflowY = 'hidden';
+                textarea.style.scrollbarWidth = 'none';
+            }
+        }, 500);
     }
     useEffect(() => {
         if (!editorRef.current) {
@@ -184,7 +206,6 @@ export default function Story() {
                 }
             }, 100);
         }
-
     }, [])
 
     const [tags, setTags] = useState([])

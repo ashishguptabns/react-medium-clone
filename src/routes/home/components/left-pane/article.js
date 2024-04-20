@@ -1,8 +1,6 @@
-import { useState } from "react"
 import { ShimmerDiv } from "../../../../ui/loading/shimmer-div"
 import { Container, CenteredRow, ProfileImg, UpdatedTime, UserName, Heading, Description, ArticleImg, HrefContainer, ArticleTextContainer } from "./article-style"
-import { useEffect } from "react"
-import { htmlToPlainText } from "./helper"
+import { useMetaData } from "./use-metadata"
 
 const PlaceholderArticle = () => {
     return (
@@ -22,28 +20,12 @@ const PlaceholderArticle = () => {
     )
 }
 export const Article = ({ article }) => {
-    const [title, setTitle] = useState('')
-    const [desc, setDesc] = useState('')
-
-    useEffect(() => {
-        if (article && article.blocks) {
-            for (const block of article.blocks) {
-                if (block.type === 'header') {
-                    setTitle(block.data.text)
-                }
-                if (block.type === 'paragraph') {
-                    const plainText = htmlToPlainText(block.data.text);
-                    setDesc(plainText)
-                    break
-                }
-            }
-        }
-    }, [])
+    const [title, desc] = useMetaData(article)
 
     return (
         <>
             {!title && <PlaceholderArticle />}
-            {title && <HrefContainer aria-label={title} href={`/story/${article.id}`}>
+            {title && <HrefContainer aria-label={title} to={`/story/${article.id}`}>
                 <Container>
                     {/* <CenteredRow>
                         <ProfileImg src={article.usrImgUrl} alt={`profile-img${title}`} />

@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 export const homeSlice = createSlice({
     name: 'home',
     initialState: {
-        currTab: 'React',
+        currTab: '',
     },
     reducers: {
         setTab: (state, action) => {
-            state.currTab = action.payload
+            state.currTab = action.payload || state.currTab
         },
     },
 })

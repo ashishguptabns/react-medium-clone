@@ -25,7 +25,7 @@ export const fetchArticlesUseCase = async (tag) => {
         const networkHost = NETWORK.HOST;
         const url = networkHost.replace('operationId', 'articles');
         const res = await fetch(url + `?tag=${tag}`);
-        data = (await res.json());
+        data = await res.json()
     } catch (error) {
         console.error('fetchArticlesUseCase', error);
     }

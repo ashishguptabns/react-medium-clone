@@ -1,6 +1,7 @@
 import styled from "styled-components"
+import { Link } from 'react-router-dom'
 
-export const HrefContainer = styled.a`
+export const HrefContainer = styled(Link)`
     -webkit-tap-highlight-color: transparent;
     text-decoration: none;
 `
