@@ -25,3 +25,4 @@ package-lock.json
 .firebase/
 .env
 libs/image/node_modules/
+libs/editorjs-inline-image/
