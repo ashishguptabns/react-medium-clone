@@ -20,6 +20,9 @@ export const fetchTabsUseCase = async () => {
 }
 
 export const fetchArticlesUseCase = async (tag) => {
+    if (!tag) {
+        return []
+    }
     let data
     try {
         const networkHost = NETWORK.HOST;

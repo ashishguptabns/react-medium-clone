@@ -153,6 +153,7 @@ export default function Story() {
     }
 
     const [title, setTitle] = useState('Share your knowledge')
+    const [allTags, setAllTags] = useState(tabs)
     useEffect(() => {
         document.title = title;
 
@@ -196,6 +197,7 @@ export default function Story() {
     }
     useEffect(() => {
         if (!editorRef.current) {
+            setAllTags(prev => [...prev, { title: 'Hidden', id: '14' }])
             editorRef.current = new EditorJS(editorConfig)
             setTimeout(() => {
                 if (articleId) {
@@ -229,7 +231,7 @@ export default function Story() {
             <Editor id='editorjs' />
             {tags && tags.length <= 0 && articleId && <PlaceholderStory />}
             {process.env.NODE_ENV === "development" && <Tags>
-                {tabs.map(tag => <Tag $isSelected={tags && tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
+                {allTags.map(tag => <Tag $isSelected={tags && tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
             </Tags>}
         </Container>
     )
