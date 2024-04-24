@@ -1,3 +1,4 @@
+import { articlesCache } from "./cache";
 import { NETWORK } from "./constants";
 import { currUser, tabs } from "./mock-data"
 
@@ -23,7 +24,11 @@ export const fetchArticlesUseCase = async (tag) => {
     if (!tag) {
         return []
     }
-    let data
+    let data = articlesCache[tag]
+    if (data?.length) {
+        console.log('using cache')
+        return data
+    }
     try {
         const networkHost = NETWORK.HOST;
         const url = networkHost.replace('operationId', 'articles');
@@ -32,6 +37,7 @@ export const fetchArticlesUseCase = async (tag) => {
     } catch (error) {
         console.error('fetchArticlesUseCase', error);
     }
+    articlesCache[tag] = data
     return data
 }
 
