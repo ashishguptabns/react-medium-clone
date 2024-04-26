@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import * as React from 'react';
 import EditorJS from '@editorjs/editorjs';
 import { useEffect } from 'react';
@@ -10,34 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import { tabs } from '../../lib/mock-data';
 import { PlaceholderStory } from './story-placeholder';
-
-const Tag = styled.div`
-    cursor: pointer;
-    border: solid 1px #F2F2F2;
-    padding: 4px 10px;
-    text-align: center;
-    border-radius: 20px;
-    margin-bottom: 10px;
-    width: fit-content;
-    color: ${props => props.$isSelected ? '#242424' : 'gray'};
-    background: ${props => props.$isSelected ? '#e1e1e1' : 'white'};
-`
-const Tags = styled.div`
-    width: 300px;
-    border-left: solid 1px #F2F2F2;
-    padding: 30px 20px;
-    text-align: -webkit-center;
-    @media(max-width: 700px){
-        display: none;
-    }
-`
-const Container = styled.div`
-    display: flex;
-`
-const Editor = styled.div`
-    padding: 24px;
-    width: 100%;
-`
+import { Container, Editor, Tag, Tags, TagsContainer } from './styles';
 
 export default function Story() {
 
@@ -231,9 +203,11 @@ export default function Story() {
         <Container>
             <Editor id='editorjs' />
             {tags && tags.length <= 0 && articleId && <PlaceholderStory />}
-            {process.env.NODE_ENV === "development" && <Tags>
-                {allTags.map(tag => <Tag $isSelected={tags && tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
-            </Tags>}
+            <TagsContainer>
+                {process.env.NODE_ENV === "development" && <Tags>
+                    {allTags.map(tag => <Tag $isSelected={tags && tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
+                </Tags>}
+            </TagsContainer>
         </Container>
     )
 }
