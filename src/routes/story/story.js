@@ -187,6 +187,7 @@ export default function Story() {
             freezeEdits()
             const textareas = document.querySelectorAll('textarea');
             for (const textarea of textareas) {
+                textarea.style.minHeight = 0 + 'px';
                 textarea.style.height = (textarea.scrollHeight) + "px";
                 textarea.style.color = '#0042ff'
                 textarea.style.background = 'white'
