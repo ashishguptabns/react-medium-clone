@@ -203,11 +203,13 @@ export default function Story() {
         <Container>
             <Editor id='editorjs' />
             {tags && tags.length <= 0 && articleId && <PlaceholderStory />}
-            <TagsContainer>
-                {process.env.NODE_ENV === "development" && <Tags>
+
+            {process.env.NODE_ENV === "development" && <TagsContainer>
+                <Tags>
                     {allTags.map(tag => <Tag $isSelected={tags && tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
-                </Tags>}
-            </TagsContainer>
+                </Tags>
+            </TagsContainer>}
+
         </Container>
     )
 }
