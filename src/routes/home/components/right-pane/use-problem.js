@@ -19,7 +19,8 @@ export const useProblem = () => {
         setRefresh(!refresh)
     }
     const showNewProblem = () => {
-        return localStorage.getItem('give_old_problem') === 'no'
+        const currHour = new Date().getHours()
+        return currHour >= 9 && currHour <= 18
     }
     useEffect(() => {
         let problem
