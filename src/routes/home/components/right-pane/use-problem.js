@@ -25,7 +25,7 @@ export const useProblem = () => {
     useEffect(() => {
         let problem
         let repeatCount = 0
-        while (repeatCount < 200) {
+        while (repeatCount < 20) {
             let randomNum = Math.floor(Math.random() * (problems.length + 2))
             randomNum = Math.min(problems.length - 1, randomNum)
 
@@ -36,7 +36,7 @@ export const useProblem = () => {
                 let days = Math.ceil(diff / 1000 / 60 / 60 / 24)
                 if ((showNewProblem() && !days) || (!showNewProblem() && days >= 20)) {
                     !days && console.log('untouched problem')
-                    days && console.log(days + ' days', 'ts: ' + localStorage.getItem(problem.substring(0, 20)))
+                    days && console.log(days + ' days old')
                     break
                 }
                 repeatCount++
