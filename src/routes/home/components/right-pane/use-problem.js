@@ -20,7 +20,7 @@ export const useProblem = () => {
     }
     const showNewProblem = () => {
         const currHour = new Date().getHours()
-        return currHour >= 9 && currHour <= 18
+        return currHour >= 9 && currHour < 18
     }
     useEffect(() => {
         let problem
