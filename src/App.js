@@ -4,8 +4,8 @@ import { Header } from './ui/header/header';
 import { lazy, Suspense } from 'react';
 import { PlaceholderPage } from './ui/placeholder-page.js';
 import { useInterceptor } from './use-interceptor.js';
-import { SiteMap } from './routes/sitemap/sitemap.js';
 
+const SiteMap = lazy(() => import('./routes/sitemap/sitemap'))
 const Story = lazy(() => import('./routes/story/story'))
 const Home = lazy(() => import('./routes/home/home'))
 

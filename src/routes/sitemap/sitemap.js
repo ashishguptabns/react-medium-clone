@@ -11,7 +11,7 @@ const Link = styled.a`
     cursor: pointer;
 `
 
-export const SiteMap = () => {
+export default function SiteMap() {
     return <Container>
         <Header>Sitemap</Header>
         <Header>React</Header>
