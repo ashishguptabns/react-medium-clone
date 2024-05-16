@@ -10,12 +10,11 @@ export const desc = {
 }
 
 export const tabs = [
+    { title: 'System Design', id: '7' },
     { title: 'Javascript', id: '4' },
     { title: 'React', id: '3' },
-    { title: 'System Design', id: '7' },
     { title: 'CSS', id: '10' },
     { title: 'Node', id: '5' },
-    { title: 'DSA', id: '9' },
 ]
 export const blankTabs = [
     { id: '3' },
