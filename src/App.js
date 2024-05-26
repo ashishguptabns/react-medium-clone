@@ -5,7 +5,7 @@ import { lazy, Suspense } from 'react';
 import { PlaceholderPage } from './ui/placeholder-page.js';
 import { useInterceptor } from './use-interceptor.js';
 
-const SiteMap = lazy(() => import('./routes/sitemap/sitemap'))
+const Login = lazy(() => import('./routes/login/login.js'))
 const Story = lazy(() => import('./routes/story/story'))
 const Home = lazy(() => import('./routes/home/home'))
 
@@ -20,7 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/story/:id?" element={<Story />} />
-            <Route path="/sitemap" element={<SiteMap />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </Suspense>
       </Router>

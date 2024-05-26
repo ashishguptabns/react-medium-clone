@@ -11,7 +11,9 @@ export const desc = {
 
 export const tabs = [
     { title: 'System Design', id: '7' },
-    { title: 'Javascript', id: '4' },
+    { title: 'Java', id: '1' },
+    { title: 'SQL', id: '4' },
+    { title: 'Javascript', id: '6' },
     { title: 'React', id: '3' },
     { title: 'CSS', id: '10' },
     { title: 'Node', id: '5' },

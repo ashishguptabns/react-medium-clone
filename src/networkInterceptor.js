@@ -13,13 +13,14 @@ export function removeInterceptor(interceptor) {
 
 export function interceptFetch() {
     const realFetch = window.fetch;
+    const key = localStorage.getItem('passKey')
     window.fetch = function (...args) {
         const [url, options = {}] = args;
         const modifiedOptions = {
             ...options,
             headers: {
                 ...(options.headers || {}),
-                'Authorization': process.env.REACT_APP_Authorization,
+                'Authorization': key,
             }
         };
         const interceptedFetch = realFetch.apply(this, [url, modifiedOptions]);

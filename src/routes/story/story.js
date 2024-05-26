@@ -120,7 +120,6 @@ export default function Story() {
         onChange: handleEditorChange,
         autofocus: false,
         logLevel: 'ERROR',
-        readOnly: process.env.NODE_ENV !== "development",
         inlineToolbar: ['link', 'bold', 'italic'],
     }
 

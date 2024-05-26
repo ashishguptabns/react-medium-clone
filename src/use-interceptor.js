@@ -5,7 +5,6 @@ export const useInterceptor = () => {
     useEffect(() => {
         interceptFetch()
         const interceptor = (requestDataOrResponse) => {
-            // console.log('Intercepted:', requestDataOrResponse);
         };
         addInterceptor(interceptor);
         return () => {

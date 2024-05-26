@@ -26,7 +26,6 @@ export const fetchArticlesUseCase = async (tag) => {
     }
     let data = articlesCache[tag]
     if (data?.length) {
-        console.log('using cache')
         return data
     }
     try {

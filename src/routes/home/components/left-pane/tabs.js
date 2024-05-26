@@ -30,7 +30,7 @@ export const Tabs = () => {
     }
     const handleURLTag = () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const tag = (urlParams.get('tag') || 'Javascript');
+        const tag = (urlParams.get('tag') || 'Java');
         dispatch(setTab(tag))
     }
     useEffect(() => {
