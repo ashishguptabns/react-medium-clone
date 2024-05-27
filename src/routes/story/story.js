@@ -204,7 +204,7 @@ export default function Story() {
             <Editor id='editorjs' />
             {tags && tags.length <= 0 && articleId && <PlaceholderStory />}
 
-            {process.env.NODE_ENV === "development" && <TagsContainer>
+            {localStorage.getItem('passKey') && <TagsContainer>
                 <Tags>
                     {allTags.map(tag => <Tag $isSelected={tags && tags.includes(tag.title.toLowerCase())} onClick={() => handleTagClick(tag)} key={tag.id}>{tag.title}</Tag>)}
                 </Tags>

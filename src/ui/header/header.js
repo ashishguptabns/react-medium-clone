@@ -20,8 +20,8 @@ export const Header = () => {
 
     const handleHeaderItems = () => {
         const isStoryPage = window.location.pathname.includes('story')
-        const isEditing = isStoryPage && process.env.NODE_ENV === "development"
-        setShowWriteBox(!isStoryPage && process.env.NODE_ENV === "development")
+        const isEditing = isStoryPage && localStorage.getItem('passKey')
+        setShowWriteBox(!isStoryPage && localStorage.getItem('passKey'))
         setShowSearchBox(!isStoryPage)
     }
     useEffect(() => {
