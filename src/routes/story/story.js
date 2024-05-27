@@ -120,6 +120,7 @@ export default function Story() {
         onChange: handleEditorChange,
         autofocus: false,
         logLevel: 'ERROR',
+        readOnly: !localStorage.getItem('passKey'),
         inlineToolbar: ['link', 'bold', 'italic'],
     }
 
